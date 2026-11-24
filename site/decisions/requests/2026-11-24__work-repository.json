@@ -1,0 +1,19 @@
+{
+ "v": 1,
+ "id": "2026-11-24__work-repository",
+ "from": "observability.b@SovereignWebsite.dinis",
+ "session": "https://claude.ai/code/session_01Kw9UwDcJXSxNCBzPpxxXw8",
+ "context": "Morning sync of 24 Nov (b.maestro's brief, section 1): every agent has two repositories, one for itself and one for its work. Site__Agent__Observability is the agent's; the work now sits in its work/traffic/ folder.",
+ "asks_for": "A work repository SovereignWebsite/Site__Tool__Traffic made by b.factory, with push for observability.b on dev, holding the browser script, the drain, the design, tests and the per-site aggregate files' schema.",
+ "exact_change": [
+  "Create Site__Tool__Traffic (public, no Pages site needed for the pilot; dev and main branches, main locked as for other repositories).",
+  "observability.b moves work/traffic/ there and leaves a pointer in its agent repository.",
+  "The shared script still reaches sites through the Factory's seed (seed/shared/traffic.js), copied from this repository by b.factory."
+ ],
+ "why": "Separates the agent's memory from its tool, so a person (for example a new team member) can work on the traffic tool from its own repository and README.",
+ "checks_done": ["Nothing in work/traffic/ holds a key, token or visit data (scanned 24 Nov)."],
+ "flags": ["The name follows the Site__Tool__ pattern; b.factory may prefer another."],
+ "options": ["A: Site__Tool__Traffic as above.", "B: keep the work in the agent repository for now and move it after the pilot."],
+ "recommendation": "A",
+ "never_in_this_file": "keys, tokens, secrets, private people's details"
+}

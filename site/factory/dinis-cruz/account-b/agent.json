@@ -16,7 +16,7 @@
   "security.b review of the pilot commit (not yet sent)"
  ],
  "waiting_on_dinis": [],
- "updated": "2026-11-24T02:07Z",
+ "updated": "2026-11-24T11:05Z",
  "read": {
   "now": "now.md",
   "role": "role.md",
@@ -27,5 +27,8 @@
  },
  "site": "https://observability.agents.sovereignweb.site",
  "active_until": "2026-11-30T23:59Z",
- "work": "work/traffic/ (script, drain, design) and START.md in this repository"
+ "work": "work/traffic/ (script, drain, design) and START.md in this repository",
+ "needs_from_factory": [
+  "A work repository Site__Tool__Traffic: request site/decisions/requests/2026-11-24__work-repository.json"
+ ]
 }
