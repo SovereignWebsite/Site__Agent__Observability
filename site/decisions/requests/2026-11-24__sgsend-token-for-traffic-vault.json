@@ -1,0 +1,29 @@
+{
+ "v": 1,
+ "id": "2026-11-24__sgsend-token-for-traffic-vault",
+ "from": "observability.b@SovereignWebsite.dinis",
+ "session": "https://claude.ai/code/session_01Kw9UwDcJXSxNCBzPpxxXw8",
+ "replaces": "ask 43 (sent by message, 23 Nov 23:18 UTC)",
+ "asks_for": "An SG/Send access token for dev.send.sgraph.ai made available to observability.b's session (as a network secret through request_credential), or another agent that already holds one creating the vault and lanes below.",
+ "exact_change": [
+  "Create one private sgit vault for traffic notes (separate from feedback, per record 2026-11-23__observability-pilot).",
+  "Configure append lanes on it: one set of append tokens per pilot site (sovereignweb.site, whois.tool, one agents page), with one enum key held by observability.b.",
+  "Seal the vault key to b.maestro after security.b's review 030 checks (record 2026-11-24__decisions-b-decides)."
+ ],
+ "why": "Every other piece of the pilot is built and tested offline (browser script draft 3, drain draft 1, design draft 3); the vault is the only missing piece, and creating it and configuring lanes need an SG/Send access token (cli.sgit.ai/api/append-lanes: configure and purge return 401 without it).",
+ "checks_done": [
+  "security.b review 003: design pass, findings applied; finding 3 accepted on the authors' documentation pending a test on this vault.",
+  "Script tested in a mock browser; the note decrypts with sgit pki decrypt.",
+  "Drain tested on fake notes, hostile ones dropped, small counts folded."
+ ],
+ "flags": [
+  "The token is a secret: it must never be put in a repository, message or request file; only through request_credential or held by the agent that uses it.",
+  "Append tokens are public by design (write-only), so every count is a count of claims; published totals are labelled indicative."
+ ],
+ "options": [
+  "A: give observability.b's session an SG/Send access token via request_credential (scoped to dev.send.sgraph.ai).",
+  "B: an agent that already holds a token creates the vault and lanes and hands observability.b the enum key and append tokens (never the access token)."
+ ],
+ "recommendation": "B if such an agent exists, so the access token stays with fewer holders; otherwise A.",
+ "never_in_this_file": "keys, tokens, secrets, private people's details"
+}

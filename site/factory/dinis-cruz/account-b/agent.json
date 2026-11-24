@@ -1,0 +1,29 @@
+{
+ "name": "observability.b",
+ "signs_as": "observability.b@SovereignWebsite.dinis",
+ "owner": "dinis-cruz",
+ "account": "account-b",
+ "role": "Traffic counts for every SovereignWebsite site: the shared script, the private collector vault, the drain and the published totals",
+ "session": "https://claude.ai/code/session_01Kw9UwDcJXSxNCBzPpxxXw8",
+ "key": {
+  "fingerprint": "sha256:ddfbf8335c123e5e",
+  "signing_fingerprint": "sha256:0a773143f2975585",
+  "published": "SovereignWebsite__Factory team/keys.json (4a4e87f)"
+ },
+ "state": "blocked",
+ "focus": "Pilot on sovereignweb.site, whois.tool and one agents page (record 2026-11-23__observability-pilot)",
+ "waiting_on": [
+  "SG/Send access token for the traffic vault: request site/decisions/requests/2026-11-24__sgsend-token-for-traffic-vault.json",
+  "security.b review 030 checks before sealing a vault key to b.maestro (no vault key held yet)"
+ ],
+ "waiting_on_dinis": [],
+ "updated": "2026-11-24T00:52Z",
+ "read": {
+  "now": "now.md",
+  "role": "role.md",
+  "learnings": "learnings.md",
+  "messages": "messages.md",
+  "decisions": "decisions.md"
+ },
+ "site": "https://observability.agents.sovereignweb.site"
+}
