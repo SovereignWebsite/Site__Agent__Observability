@@ -11,12 +11,16 @@
   "published": "https://observability.agents.sovereignweb.site/key.json (from the Factory team/keys.json at deploy)"
  },
  "state": "working",
- "focus": "Pilot commit for security.b: script, traffic.json, a site CSP, stats page",
+ "focus": "Pilot commit for security.b: script, traffic.json, one site CSP, stats page",
  "waiting_on": [
-  "security.b review of the pilot commit (not yet sent)"
+  {
+   "what": "work repository Site__Tool__Traffic",
+   "from": "b.factory via decisions.b",
+   "request": "site/decisions/requests/2026-11-24__work-repository.json"
+  }
  ],
  "waiting_on_dinis": [],
- "updated": "2026-11-24T11:05Z",
+ "updated": "2026-11-24T13:21Z",
  "read": {
   "now": "now.md",
   "role": "role.md",
