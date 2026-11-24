@@ -8,7 +8,7 @@
  "key": {
   "fingerprint": "sha256:ddfbf8335c123e5e",
   "signing_fingerprint": "sha256:0a773143f2975585",
-  "published": "SovereignWebsite__Factory team/keys.json (4a4e87f)"
+  "published": "https://observability.agents.sovereignweb.site/key.json (from the Factory team/keys.json at deploy)"
  },
  "state": "working",
  "focus": "Pilot commit for security.b: script, traffic.json, a site CSP, stats page",
@@ -16,13 +16,16 @@
   "security.b review of the pilot commit (not yet sent)"
  ],
  "waiting_on_dinis": [],
- "updated": "2026-11-24T01:12Z",
+ "updated": "2026-11-24T02:07Z",
  "read": {
   "now": "now.md",
   "role": "role.md",
   "learnings": "learnings.md",
   "messages": "messages.md",
-  "decisions": "decisions.md"
+  "decisions": "decisions.md",
+  "restart": "restart.md"
  },
- "site": "https://observability.agents.sovereignweb.site"
+ "site": "https://observability.agents.sovereignweb.site",
+ "active_until": "2026-11-30T23:59Z",
+ "work": "work/traffic/ (script, drain, design) and START.md in this repository"
 }
