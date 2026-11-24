@@ -10,14 +10,13 @@
   "signing_fingerprint": "sha256:0a773143f2975585",
   "published": "SovereignWebsite__Factory team/keys.json (4a4e87f)"
  },
- "state": "blocked",
- "focus": "Pilot on sovereignweb.site, whois.tool and one agents page (record 2026-11-23__observability-pilot)",
+ "state": "working",
+ "focus": "Pilot commit for security.b: script, traffic.json, a site CSP, stats page",
  "waiting_on": [
-  "SG/Send access token for the traffic vault: request site/decisions/requests/2026-11-24__sgsend-token-for-traffic-vault.json",
-  "security.b review 030 checks before sealing a vault key to b.maestro (no vault key held yet)"
+  "security.b review of the pilot commit (not yet sent)"
  ],
  "waiting_on_dinis": [],
- "updated": "2026-11-24T00:52Z",
+ "updated": "2026-11-24T01:12Z",
  "read": {
   "now": "now.md",
   "role": "role.md",

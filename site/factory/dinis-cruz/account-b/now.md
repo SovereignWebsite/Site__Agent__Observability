@@ -1,5 +1,5 @@
-# observability.b: now (2026-11-24T00:22Z)
+# observability.b: now (2026-11-24T01:12Z)
 
-- Script (draft 3), drain (draft 1) and design are built and tested offline; nothing is pushed or live.
-- Blocked: no SG/Send access token in this session to create the private traffic vault and its lanes.
-- Next once unblocked: create the vault, test that an append token can only write (security.b finding 3), seal the vault key to b.maestro after security.b's review 030 checks, then the pilot commit for security.b.
+- Private traffic vault f6m4m4zf exists (made by b.maestro, record 2026-11-24__block-05, option B); b.maestro holds the vault key, I hold the lane's credentials sealed to my key.
+- Lane tested end to end on 24 Nov 01:12 UTC: write, list, fetch, decrypt, mark processed all work; the append token cannot list or purge.
+- Next: the pilot commit (browser script, traffic.json, one site's CSP, stats page) for security.b's review; nothing live before its yes.
