@@ -4,14 +4,14 @@
  "owner": "dinis-cruz",
  "account": "account-b",
  "role": "Traffic counts for every SovereignWebsite site: the shared script, the private collector vault, the drain and the published totals",
- "session": "https://claude.ai/code/session_01Kw9UwDcJXSxNCBzPpxxXw8",
+ "session": "https://claude.ai/code/session_01Kw9UwCWpbdQcxFY1GgbC2J",
  "key": {
-  "fingerprint": "sha256:ddfbf8335c123e5e",
-  "signing_fingerprint": "sha256:0a773143f2975585",
-  "published": "https://observability.agents.sovereignweb.site/key.json (from the Factory team/keys.json at deploy)"
+  "fingerprint": "sha256:dd793b83d902ea84",
+  "signing_fingerprint": "sha256:2e6140c55b5ce7ab",
+  "published": "site/keys/observability.b.json (commit 95ede5f); the old key sha256:ddfbf8335c123e5e is still live in the Factory team/keys.json, retirement asked of maestro.b"
  },
- "state": "handing-over",
- "focus": "Handover (protocol v1); parked: the pilot commit for security.b",
+ "state": "taking-over",
+ "focus": "Takeover (handover protocol v1): waiting on maestro.b to re-seal the vault credentials and retire the old Factory key entry",
  "waiting_on": [
   {
    "what": "work repository Site__Tool__Traffic",
@@ -20,7 +20,7 @@
   }
  ],
  "waiting_on_dinis": [],
- "updated": "2026-11-25T22:22Z",
+ "updated": "2026-11-25T22:27Z",
  "read": {
   "now": "now.md",
   "role": "role.md",
@@ -28,7 +28,8 @@
   "messages": "messages.md",
   "decisions": "decisions.md",
   "restart": "restart.md",
-  "handover": "sessions/2026-11-25-a/handover.md"
+  "handover": "sessions/2026-11-25-a/handover.md",
+  "session_notes": "sessions/2026-11-25-b/notes.md"
  },
  "site": "https://observability.agents.sovereignweb.site",
  "active_until": "2026-11-30T23:59Z",

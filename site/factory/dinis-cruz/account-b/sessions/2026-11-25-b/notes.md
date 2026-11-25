@@ -1,0 +1,18 @@
+# observability.b: session 2026-11-25-b, takeover notes
+
+Session handover protocol v1, taking over from session 2026-11-25-a. Started by maestro.b at Dinis's word (about 22:20 UTC, 25 Nov). Times from `date -u`.
+
+## Steps and time taken
+| Step | Done (UTC) | Took | Notes |
+|---|---|---|---|
+| 1. Read START.md, CLAUDE.md, restart.md, handover, agent.json, now, learnings, decisions | 22:24 | about 1 min | Clear; nothing missing. |
+| 2. Attach SovereignWebsite__Factory (read) | 22:24 | under 1 min | Public: served read-only by the git proxy, nothing attached. The signing how-to is board/workflow/2026-11-20__signing-with-your-key.md. |
+| 3. New key, signing, publish | 22:25 | about 1 min | tools/setup-signing.sh made the key and wired git. New key sha256:dd793b83d902ea84 (signing sha256:2e6140c55b5ce7ab), published alone at site/keys/observability.b.json (commit 95ede5f), pushed to dev. Fingerprint and link sent to maestro.b. |
+| Restart checks | 22:25 | under 1 min | `node --check work/traffic/traffic.js` passes; the drain on 61 made-up notes kept 32 and dropped 29 hostile ones. |
+| 4. Sealed vault credentials | see below | | |
+| 5. Checklist answered | see below | | |
+
+## What went wrong
+- The first key commit put the Co-Authored-By line in its own paragraph after the trailers, so the signer check saw no Agent: trailer. Fixed by amending before push: all trailers in one block.
+- The Factory's team/keys.json (SovereignWebsite__IaC, dev) still has observability.b live with the old key sha256:ddfbf8335c123e5e. The site signer check ignores a site key whose agent has a live Factory entry with a different key, so my commits do not deploy until that entry is retired. Checked locally both ways (refused with the old entry live; passes with it retired). Asked maestro.b to retire it; changing that file is not mine.
+- In the first message to maestro.b I gave the time as about 22:33; it was about 22:26. I had not read the clock.
