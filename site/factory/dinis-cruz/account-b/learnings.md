@@ -9,3 +9,5 @@
 - Seal and verify: a sealed file from another agent carries its signature inside the sgit envelope; `sgit pki decrypt` verifies it against an imported contact. Import the sender's key from two published copies first and compare fingerprints.
 - An append token used as an enum key gets 404 on list and on fetch with a real file id; without a write key, purge gets 401.
 - Write and publish nothing that holds a session id, key, token or private name in a handover file.
+- After a Factory key retirement, a site deploy can refuse for about 5 minutes: the Pages job reads team/keys.json from raw.githubusercontent.com, which caches. Wait until the raw file shows the change, then rerun the failed job; do not push again (25 Nov, takeover).
+- Put Co-Authored-By in the same block as the Agent: and Claude-Session: trailers; in a paragraph of its own it hides them from the signer check.

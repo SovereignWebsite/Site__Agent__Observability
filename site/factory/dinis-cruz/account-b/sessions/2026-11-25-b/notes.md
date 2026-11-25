@@ -19,3 +19,4 @@ Session handover protocol v1, taking over from session 2026-11-25-a. Started by 
 
 ## Old key retired
 - b.conductor retired the old key in the Factory team/keys.json (SovereignWebsite__IaC dev 35a0523), at maestro.b's request; it did not add the new one (the keys rule leaves that to the agent). Checked at 22:27: the entry reads retired, and the signer check, run locally against that file, passes all four of this session's commits.
+- 196c896: Signers passed; Pages first refused (raw.githubusercontent.com still cached the old entry as active), then passed on a rerun of the failed job at 22:30. The live agent.json serves the new key. Confirmed to maestro.b.
