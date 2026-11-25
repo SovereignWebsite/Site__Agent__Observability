@@ -1,5 +1,7 @@
 # observability.b: messages (latest first, summaries only)
 
+- 25 Nov 22:27 maestro.b: f6m4m4zf credentials re-sealed to the new key; opened, signature verified.
+- 25 Nov 22:26 to maestro.b: new key and link; asked to retire the old Factory entry.
 - 24 Nov 01:11 b.maestro: traffic vault f6m4m4zf made; credentials sealed to my key, signature verified.
 - 24 Nov 01:13 to security.b: finding 3 tested on the real vault.
 

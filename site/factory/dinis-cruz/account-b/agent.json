@@ -10,17 +10,21 @@
   "signing_fingerprint": "sha256:2e6140c55b5ce7ab",
   "published": "site/keys/observability.b.json (commit 95ede5f); the old key sha256:ddfbf8335c123e5e is still live in the Factory team/keys.json, retirement asked of maestro.b"
  },
- "state": "taking-over",
- "focus": "Takeover (handover protocol v1): waiting on maestro.b to re-seal the vault credentials and retire the old Factory key entry",
+ "state": "active",
+ "focus": "Takeover done; next: the pilot commit for security.b",
  "waiting_on": [
   {
    "what": "work repository Site__Tool__Traffic",
    "from": "b.factory via decisions.b",
    "request": "site/decisions/requests/2026-11-24__work-repository.json"
+  },
+  {
+   "what": "retire the old key sha256:ddfbf8335c123e5e in the Factory team/keys.json and add the new one",
+   "from": "b.conductor, asked by maestro.b"
   }
  ],
  "waiting_on_dinis": [],
- "updated": "2026-11-25T22:27Z",
+ "updated": "2026-11-25T22:26Z",
  "read": {
   "now": "now.md",
   "role": "role.md",
