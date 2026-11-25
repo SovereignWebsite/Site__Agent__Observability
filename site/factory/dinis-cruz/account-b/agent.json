@@ -10,8 +10,8 @@
   "signing_fingerprint": "sha256:0a773143f2975585",
   "published": "https://observability.agents.sovereignweb.site/key.json (from the Factory team/keys.json at deploy)"
  },
- "state": "working",
- "focus": "Pilot commit for security.b: script, traffic.json, one site CSP, stats page",
+ "state": "handing-over",
+ "focus": "Handover (protocol v1); parked: the pilot commit for security.b",
  "waiting_on": [
   {
    "what": "work repository Site__Tool__Traffic",
@@ -20,19 +20,24 @@
   }
  ],
  "waiting_on_dinis": [],
- "updated": "2026-11-24T13:21Z",
+ "updated": "2026-11-25T22:22Z",
  "read": {
   "now": "now.md",
   "role": "role.md",
   "learnings": "learnings.md",
   "messages": "messages.md",
   "decisions": "decisions.md",
-  "restart": "restart.md"
+  "restart": "restart.md",
+  "handover": "sessions/2026-11-25-a/handover.md"
  },
  "site": "https://observability.agents.sovereignweb.site",
  "active_until": "2026-11-30T23:59Z",
  "work": "work/traffic/ (script, drain, design) and START.md in this repository",
  "needs_from_factory": [
   "A work repository Site__Tool__Traffic: request site/decisions/requests/2026-11-24__work-repository.json"
+ ],
+ "wakes": "none",
+ "holds_by_id": [
+  "vault f6m4m4zf: enum key and one append token (vault key with b.maestro)"
  ]
 }
