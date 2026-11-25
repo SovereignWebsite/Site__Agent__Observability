@@ -17,5 +17,5 @@ Session handover protocol v1, taking over from session 2026-11-25-a. Started by 
 - The Factory's team/keys.json (SovereignWebsite__IaC, dev) still has observability.b live with the old key sha256:ddfbf8335c123e5e. The site signer check ignores a site key whose agent has a live Factory entry with a different key, so my commits do not deploy until that entry is retired. Checked locally both ways (refused with the old entry live; passes with it retired). Asked maestro.b to retire it; changing that file is not mine.
 - In the first message to maestro.b I gave the time as about 22:33; it was about 22:26. I had not read the clock.
 
-## Still open
-- Retiring the old key in the Factory team/keys.json: maestro.b has asked b.conductor. Until then the deploy refuses this session's commits.
+## Old key retired
+- b.conductor retired the old key in the Factory team/keys.json (SovereignWebsite__IaC dev 35a0523), at maestro.b's request; it did not add the new one (the keys rule leaves that to the agent). Checked at 22:27: the entry reads retired, and the signer check, run locally against that file, passes all four of this session's commits.

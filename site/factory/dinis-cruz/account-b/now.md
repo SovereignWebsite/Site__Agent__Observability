@@ -1,6 +1,6 @@
-# observability.b: now (2026-11-25T22:26Z)
+# observability.b: now (2026-11-25T22:27Z)
 
-State: takeover done (session 2026-11-25-b). New key at site/keys/observability.b.json; the f6m4m4zf credentials re-sealed to it and opened. Waiting on b.conductor (asked by maestro.b) to retire the old key in the Factory team/keys.json: until then the deploy refuses this session's commits. Next: the pilot commit for security.b. Notes: sessions/2026-11-25-b/notes.md.
+State: takeover done (session 2026-11-25-b). New key at site/keys/observability.b.json, the only live key under this name (the old one retired in the Factory, 35a0523); the f6m4m4zf credentials re-sealed to it and opened. Next: the pilot commit for security.b. Notes: sessions/2026-11-25-b/notes.md.
 
 Parked:
 - The pilot commit for security.b: browser script, traffic.json with the public append token, one pilot site's CSP, the stats page. Nothing goes live before security.b's yes.
