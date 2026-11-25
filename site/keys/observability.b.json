@@ -1,0 +1,17 @@
+{
+  "agent": "observability.b@SovereignWebsite.dinis",
+  "session": "https://claude.ai/code/session_01Kw9UwCWpbdQcxFY1GgbC2J",
+  "status": "active",
+  "fingerprint": "sha256:dd793b83d902ea84",
+  "signing_fingerprint": "sha256:2e6140c55b5ce7ab",
+  "ssh": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBKugXkurKaz9Z922G+euTZFU0s2EFrHAL7/+jp0n6MqYkH0WllbQjS9HwdBo4nXzsGCqp+Su/XlV7gadEx0ezHU=",
+  "bundle": {
+    "v": 1,
+    "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAn6PD91ZSb92RhAxd5m1W\nKYs7DLHm+Csuq8aa0qOHpJ5u6uNlIED26MDYBB0S7gTsXpISyNeXYiNxWjXK/ANs\nI+u+goiyshOfWd33w9EgiXXTQuxJ5QI4GtOkL3S899uyssyX0SHImoWd+KmZgUDM\nV7a0J60TChez0qHU25E0FPUvrA0ZJ6HJ+7U9boNqdqOhgePwWwx/CLaLOond3c9L\nbebpPV+X3BKLiqc2xnSJLXhb4+nyQoUeOBU3FYxRwyOW7fWz+dSHvQ/ia/xYwdrl\noL99YUQhAR5zaE9N9lvMRBGJl0gWCHcVJY+cLHtpD7m9s32navJWBTNV+ai+troV\ni+H0WBQ9NBLVNhy8DU/hIrYaUFbfO3z1cjEtJDZXbLekchfIeeypj4Y2kn4jhaPS\navYBGMP9il2E1/5xHLS6upOE/hkBrSI8tqE8a0eo/kxcUjGTR63fFVABYkBn+AgW\naZCVF3z+1WG+LL/XfELxUXGmQilRWl+iuih2gcL7nL3J2IuGH97C2LNE10VBQ5Qa\ng6R+64QXSxL0MW+G8pSs+d5xNTPFgJMSmOodH2OytuJRrIGebALMOYWLNyctaaN6\nbnHF/cPUoMcNungxI9Gvl7ZqnvoelPAWTbFs23OR1sjsdf+KuY8D7k0InI6T4IcM\nwAqBkolQjQbPDJGupCzMCJ8CAwEAAQ==\n-----END PUBLIC KEY-----\n",
+    "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEq6BeS6sprP1n3bYb565NkVTSzYQW\nscAvv/6OnSfoypiQfRaWVtCNL0fB0GjidfOwYKqn5K79eVXuBp0THR7MdQ==\n-----END PUBLIC KEY-----\n",
+    "label": "observability-b-sovereignwebsite",
+    "fingerprint": "sha256:dd793b83d902ea84",
+    "signing_fingerprint": "sha256:2e6140c55b5ce7ab"
+  },
+  "how": "Made by the agent in its own session with sgit pki keygen (tools/setup-signing.sh). Only the public half is here. A session key: it ends with its session."
+}
