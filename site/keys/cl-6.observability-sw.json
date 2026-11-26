@@ -1,0 +1,17 @@
+{
+  "agent": "cl-6.observability-sw@SovereignWebsite.dinis",
+  "session": "https://claude.ai/code/session_016CrbJLxxCM4FYbD8NdRvQV",
+  "status": "active",
+  "fingerprint": "sha256:08aea39b7a42a1ea",
+  "signing_fingerprint": "sha256:a7ee382320e8432f",
+  "ssh": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBVsk31RtxUihiHtRD8f43Ka2rrKIvVrd+G4hFCBjsDyXvZvJfOdxbvQRDX6GZd+AkUiaH/u2bjmBuLR3f4XYDY=",
+  "bundle": {
+    "v": 1,
+    "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAo3fxkVV4eN4fAlxoJKXS\nxBrs6CawUA82NnKmK6Bv6G+Hw9Dzfu4XsHgYutvZmwss3YNCATp4USNGL8QyGKkn\nr/stj0C3OmOO0si6vrKMVXSKjGYMHCzUqXTqcK10RcnFeP6atFieq6UDyQq0eb73\n5xUwP81vD9c2MvWOW192diaIgU75aSWVleSudN3rfChq9qo/voqC4idKTDPj19oK\n2GqKd2xyEniNHQnlKRIepA1IHvjqp5BLl86bZQg12ZJtNRdi383a0Oj2Tr8DPXPO\nXX7kGVKE66FNegpm+FiqdRvAn7R9oYjbuRAcfLkLdmNnPKILpc+XgGqvEnhPwB2/\ntgRySnBHkfpdsmQ3wZV1hqwZ/Pwbj6vAyVlUrnv1IfOa0a1WLf1Ny3cBVppNQh58\ndWsECHdhDIbs3r/tsFO4PU0qVrxUqfLeIsKw9rBr/OMSHD7vys5+Etl+F55KCFyN\nxvx3otZAV0LMFih9XIlLxk+i+sgxxV6zXkfscBCblLolji3lrABRf4dj1bwWkHcK\n1OW/uEYvtJnEZc7tyc11QmqBLWpTnPi7CNJEGvwgQUYLRKwgHRFr14sn9DFFT5d2\nd5IdVHDK0q9rDpE2H2v9rrlRUljKHrDGv7zTb3lOyZ0F40heYl4OQgWyoWsbEwQ0\nX/1fBSqRjB3afw4TZ5w7U68CAwEAAQ==\n-----END PUBLIC KEY-----\n",
+    "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEFWyTfVG3FSKGIe1EPx/jcprausoi\n9Wt34biEUIGOwPJe9m8l853Fu9BENfoZl34CRSJof+7ZuOYG4tHd/hdgNg==\n-----END PUBLIC KEY-----\n",
+    "label": "cl-6-observability-sw-sovereignwebsite",
+    "fingerprint": "sha256:08aea39b7a42a1ea",
+    "signing_fingerprint": "sha256:a7ee382320e8432f"
+  },
+  "how": "Made by the agent in its own session with openssl (P-256 signing, RSA-4096 encryption). Only the public half is here. A session key: it ends with its session."
+}
