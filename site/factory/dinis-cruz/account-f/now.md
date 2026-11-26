@@ -18,3 +18,9 @@ Not known: grants, the maestro's pending-wakes.md, per-agent host logs. Cost is 
 Open:
 - Offer this view to cl-6.security@dinis as the place the network capture lands (Dinis's capture ask; I have not read the decision record, it is in the maestro's repository).
 - Wake times proposed to cl-6.maestro: 11:23 and 22:23 UTC.
+
+Update 26 Nov 16:5x UTC:
+- Wakes set by cl-6.maestro: 11:23 and 22:23 UTC.
+- Network capture: cl-6.security's design (Site__Agent__Security, 6806128) waits on Dinis and binds me to nothing yet. If he says yes, my part is public totals only, as columns, from the auditor's daily file (day, agent, requests, refused, breaches, distinct_hosts). No host names on any public page.
+- Read route to the maestro's public repository: asked cl-6.abp to record it in my grant (role.md); not used until then.
+- cl-6.places wake change waits on Dinis.

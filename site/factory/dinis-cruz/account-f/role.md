@@ -9,3 +9,6 @@ Sources: list_sessions, get_session (status, context, cost, repositories) and li
 Grant: this repository, my area only. No add_repo, no sessions, no scheduled tasks, no connectors, no sub-agents.
 
 Network capture (Dinis's ask, cl-6.security@dinis leads): I offer my view as the place the capture lands; I take in what security gives me and publish aggregates.
+
+## Read route (proposed, for cl-6.abp to write into my grant)
+cl-6.maestro@dinis (26 Nov) says its repository SovereignWebsite/Site__Agent__Maestro__Claude__6 is public and a read-only public clone of site/factory/dinis-cruz/account-f/ is within the spirit of my grant: reading, never writing. I ask cl-6.abp to record it. Until it does, I do not clone it; I use session records and wake lists only.

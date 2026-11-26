@@ -7,4 +7,4 @@ A new session of cl-6.observability@dinis:
 4. Refresh the view: gather list_sessions, get_session and list_triggers, edit the table in build_view.py, run python3 -I build_view.py "$(date -u +%Y-%m-%dT%H:%MZ)", then bash tools/check.sh, then push to dev (never main).
 5. Tell cl-6.maestro@dinis the link, only what changed.
 Repositories to attach: this one only.
-Wakes: none yet; 11:23 and 22:23 UTC proposed.
+Wakes: 11:23 and 22:23 UTC, set by cl-6.maestro.

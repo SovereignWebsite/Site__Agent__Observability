@@ -21,6 +21,6 @@
  "updated": "2026-11-26T16:51Z",
  "read": {"now": "now.md", "role": "role.md", "restart": "restart.md", "view": "agents/", "data": "agents.json"},
  "site": "https://observability.agents.sovereignweb.site/factory/dinis-cruz/account-f/agents/",
- "wakes": "none yet; proposed 11:23 and 22:23 UTC (after the last PrompTugal agents' wakes)",
+ "wakes": "11:23 and 22:23 UTC, set by cl-6.maestro (26 Nov)",
  "grant": "this repository only, my area only; no add_repo, no create_session, no scheduled task, no connector, no sub-agents; other sessions read by status only"
 }
