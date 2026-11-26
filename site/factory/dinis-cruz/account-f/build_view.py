@@ -86,6 +86,86 @@ ARCHIVED = [
  ("cl-6.fringe@PrompTugal","session_016CrbJKaYmvvH9W9jBkyyHE","No wake found for it."),
 ]
 
+# ---- delta of the 22:23 wake (get_session on the changed or risky ones; list_sessions for status and needs) ----
+REPLACED = {"cl-6.abp@PrompTugal","cl-6.accountant@dinis","cl-6.devops@PrompTugal","cl-6.journalist@PrompTugal","cl-6.conductor-sw@SovereignWebsite"}
+R = [r for r in R if r[0] not in REPLACED]
+R += [
+ ("cl-6.abp@PrompTugal","PrompTugal","sonnet","E2",1,298447,7.13,"IDLE","21:38","",f"37 10,21 * * * ({L})"),
+ ("cl-6.accountant@dinis","Account","sonnet","E2",1,108169,0.56,"IDLE","17:58","","none found"),
+ ("cl-6.devops@PrompTugal","PrompTugal","sonnet","E2",1,126589,1.09,"IDLE","21:07","Dinis's word to add_repo, to attach the website",f"7 8,19 * * * ({L})"),
+ ("cl-6.journalist@PrompTugal","PrompTugal","sonnet","E1",1,415311,10.69,"IDLE","21:07","Dinis's add_repo word, or a route to attach the website with push",f"57 7,18 * * * ({L})"),
+ ("cl-6.conductor@SovereignWebsite","Sovereign Website","opus","E2",1,217547,5.76,"IDLE","18:49","Decisions 2 to 5 in map.md; a route to the Factory for the signer-check patch","47 9,18 * * * (UTC)"),
+ ("cl-6.onboarding@SovereignWebsite","Sovereign Website","sonnet","E2",1,141254,1.54,"IDLE","18:49","","7 8,16 * * * (UTC)"),
+ ("cl-6.design@dinis","Sovereign Website","sonnet","E2",1,149149,1.19,"IDLE","20:42","","41 8,12,16,20 * * * (UTC)"),
+ ("cl-6.librarian@dinis","Sovereign Website","sonnet","E2",1,100076,0.31,"IDLE","16:50","Add a push rule, or push 76eddf0 (unpushed work)","none found"),
+ ("cl-6.studio@SovereignWebsite","Sovereign Website","opus","E2",1,255449,5.22,"IDLE","20:18","Three answers: proof of concept, eight questions, videos","17 10,20 * * * (UTC)"),
+]
+ARCHIVED += [
+ ("cl-6.abp@PrompTugal (replaced 26 Nov 16:55)","session_016CrbJK3xXBhUMA6rucuPPd","Its wake moved to the new session (trig_01MzAd3PsDG8FtCVSxpCyCHT)."),
+ ("cl-6.accountant@dinis (replaced 26 Nov 16:56)","session_016CrbJJ7NP5eaJypGAHgdGi","No wake found for it."),
+ ("cl-6.devops@PrompTugal (replaced 26 Nov 16:56)","session_016CrbJLNFt4cFTXMVgkqcCY","Its wake moved to the new session (trig_01JkWz1fjbLfzWDfNwoh3CxH)."),
+ ("cl-6.journalist@PrompTugal (replaced 26 Nov 16:56)","session_016CrbJLhtarwbcbxJnrF3bP","Its wake moved to the new session (trig_01ViGgyUxAJcR6QuyyjVreh4)."),
+ ("cl-6.conductor-sw@SovereignWebsite (replaced 26 Nov 16:59)","session_016CrbJJDDrc1h8iMR8TwXKq","Its wake moved to the new session (trig_014R2LQTMRT45UGo1dkSk6sm)."),
+]
+GET = {  # name: (ctx, cost, status, needs); read by get_session at 22:25
+ "cl-6.maestro@dinis":(627761,37.90,"IDLE","Website push access before 09:00 UTC; a yes to reset the maestro session"),
+ "cl-6.security@dinis":(598355,32.11,"IDLE","Choose CI-check option (a) or (b)"),
+ "cl-6.decisions@dinis":(92062,86.03,"IDLE","Reply on cost caps"),
+ "cl-6.reviewer@PrompTugal":(572368,19.74,"IDLE","App repo access; a recorded approval for a draft"),
+ "cl-6.dev@PrompTugal":(149451,68.43,"IDLE",""),
+ "cl-6.library@PrompTugal":(469682,15.85,"IDLE",""),
+ "cl-6.ontologist@PrompTugal":(465084,14.90,"IDLE",""),
+ "cl-6.data@PrompTugal":(651147,27.63,"IDLE",""),
+}
+NEEDS = {  # from list_sessions at 22:24 (status only)
+ "cl-6.programme@PrompTugal":"Word on the agenda; history/** in the ABP grant",
+ "cl-6.customers@PrompTugal":"Allow its push and register its key; decide P5 and P11",
+ "cl-6.backup@PrompTugal":"A backup destination; history/** and add_repo; read access to other repos",
+ "cl-6.outreach@PrompTugal":"Whether to allow attaching the website",
+ "cl-6.accountant@PrompTugal":"Dinis: a cap or ceiling level; where the ledger now lives",
+ "cl-6.places@PrompTugal":"Dinis on grant P11 c (cl-6.abp has not applied it)",
+ "cl-6.live@PrompTugal":"The pages.yml anchor decision",
+ "cl-6.videos@PrompTugal":"Whether to push its key branch and open the key PR",
+ "cl-6.events@PrompTugal":"Merge IaC #25; a word to open the key PR",
+ "cl-6.civic@PrompTugal":"history/** and board/team/civic/** in its grant; its key in keys.json",
+ "cl-6.travel@PrompTugal":"history/** and review/** write access",
+ "cl-6.infra@PrompTugal":"Merges, the App's permissions, verify promptugal.news",
+ "cl-6.data.london@PrompTugal":"Approve api.tfl.gov.uk read-only GET (abp, security, rights, Dinis)",
+ "cl-6.place.london@PrompTugal":"TfL route, a dev pin change, security review, grant P11 c",
+ "cl-6.router@dinis":"", "cl-6.analyst@PrompTugal":"", "cl-6.checker@PrompTugal":"", "cl-6.security@PrompTugal":"",
+ "cl-6.cyber@PrompTugal":"", "cl-6.rights@PrompTugal":"", "cl-6.translator@PrompTugal":"", "cl-6.investors@PrompTugal":"",
+ "cl-6.researcher@PrompTugal":"", "cl-6.historian@PrompTugal":"", "cl-6.signals@PrompTugal":"", "cl-6.bulletins@PrompTugal":"",
+ "cl-6.weather@PrompTugal":"",
+}
+TIME = {"cl-6.conductor@PrompTugal":"21:19","cl-6.analyst@PrompTugal":"18:54","cl-6.programme@PrompTugal":"18:44","cl-6.checker@PrompTugal":"19:15",
+ "cl-6.curator@PrompTugal":"19:06","cl-6.customers@PrompTugal":"19:43","cl-6.investors@PrompTugal":"20:34","cl-6.backup@PrompTugal":"21:04",
+ "cl-6.outreach@PrompTugal":"18:38","cl-6.researcher@PrompTugal":"18:38","cl-6.historian@PrompTugal":"20:24","cl-6.telemetry@PrompTugal":"21:18",
+ "cl-6.translator@PrompTugal":"20:10","cl-6.rights@PrompTugal":"19:55","cl-6.synthetic@PrompTugal":"20:15","cl-6.sherpa@PrompTugal":"20:34",
+ "cl-6.observability@PrompTugal":"18:37","cl-6.ontologist@PrompTugal":"19:36","cl-6.accountant@PrompTugal":"21:18","cl-6.designer@PrompTugal":"20:34",
+ "cl-6.places@PrompTugal":"18:49","cl-6.correspondent@PrompTugal":"20:11","cl-6.security@PrompTugal":"21:15","cl-6.bulletins@PrompTugal":"18:37",
+ "cl-6.videos@PrompTugal":"18:37","cl-6.live@PrompTugal":"18:36","cl-6.events@PrompTugal":"18:36","cl-6.cyber@PrompTugal":"18:39",
+ "cl-6.signals@PrompTugal":"18:37","cl-6.startups@PrompTugal":"18:40","cl-6.civic@PrompTugal":"18:36","cl-6.travel@PrompTugal":"18:36",
+ "cl-6.weather@PrompTugal":"18:36","cl-6.router@dinis":"18:48","cl-6.infra@PrompTugal":"17:58","cl-6.place.london@PrompTugal":"18:26",
+ "cl-6.data.london@PrompTugal":"17:25","cl-6.observability-sw@SovereignWebsite":"16:50","cl-6.observability@dinis":"22:24",
+ "cl-6.maestro@dinis":"21:37","cl-6.security@dinis":"17:32","cl-6.decisions@dinis":"21:21","cl-6.dev@PrompTugal":"21:15",
+ "cl-6.library@PrompTugal":"18:36","cl-6.data@PrompTugal":"18:36"}
+RD = {}
+_R=[]
+for t in R:
+    t=list(t); n=t[0]
+    if n in GET: t[5],t[6],t[7],t[9]=GET[n][0],GET[n][1],GET[n][2],GET[n][3]; RD[n]="22:25"
+    if n in NEEDS: t[9]=NEEDS[n]
+    if n in TIME: t[8]=TIME[n]
+    if n=="cl-6.observability@dinis": t[10]=f"23 11,22 * * * (UTC)"
+    if n=="cl-6.observability-sw@SovereignWebsite": t[10]="13 8 * * * (UTC)"; t[7]="IDLE"
+    if n in ("cl-6.data.london@PrompTugal",): t[7]="IDLE"; t[10]="23 6,17 * * * (UTC)"
+    if n=="cl-6.place.london@PrompTugal": t[7]="IDLE"
+    if n=="cl-6.dev@PrompTugal": pass
+    _R.append(tuple(t))
+R=_R
+NEW_NAMES={"cl-6.abp@PrompTugal","cl-6.accountant@dinis","cl-6.devops@PrompTugal","cl-6.journalist@PrompTugal","cl-6.conductor@SovereignWebsite","cl-6.onboarding@SovereignWebsite","cl-6.design@dinis","cl-6.librarian@dinis","cl-6.studio@SovereignWebsite"}
+for n in NEW_NAMES: RD[n]="22:25"
+
 rows = []
 for n, proj, model, env, repos, ctx, cost, st, upd, needs, wake in R:
     pct = ctx / WINDOW
@@ -97,7 +177,7 @@ for n, proj, model, env, repos, ctx, cost, st, upd, needs, wake in R:
     if needs and st in ("IDLE", "REQUIRES_ACTION"): flags.append("waiting on a person with a needs_action")
     rows.append(dict(name=n, project=proj, model=model, environment=env, repos_attached=repos,
                      context_used=ctx, context_pct=round(pct * 100, 1), reported_cost_usd=cost, status=st,
-                     last_activity=upd, needs_action=needs, wake=wake, flags=flags))
+                     last_activity=upd, context_read=RD.get(n,'16:50'), needs_action=needs, wake=wake, flags=flags))
 
 total = round(sum(r["reported_cost_usd"] or 0 for r in rows), 2)
 fl = lambda key: [r["name"] for r in rows if any(f.startswith(key) for f in r["flags"])]
@@ -125,7 +205,7 @@ for r in sorted(rows, key=lambda r: -r["context_used"]):
     cls = "hot" if any(f.startswith("handover") for f in r["flags"]) else ("warn" if r["flags"] else "")
     cost = "n/a" if r["reported_cost_usd"] is None else f"{r['reported_cost_usd']:.2f}"
     trs.append(f"<tr class='{cls}'><th scope='row'>{e(r['name'])}</th><td>{e(r['project'])}</td><td>{e(r['model'])}</td><td>{r['environment']}</td>"
-               f"<td class='n'>{r['repos_attached']}</td><td class='n'>{r['context_pct']}%</td><td class='n'>{cost}</td><td>{e(r['status'].lower().replace('_',' '))}</td>"
+               f"<td class='n'>{r['repos_attached']}</td><td class='n'>{r['context_pct']}% ({r['context_read']})</td><td class='n'>{cost}</td><td>{e(r['status'].lower().replace('_',' '))}</td>"
                f"<td>{e(r['last_activity'])}</td><td>{e(r['wake'])}</td><td>{e('; '.join(r['flags'])) or '&nbsp;'}</td></tr>")
 envs = "".join(f"<li><strong>{k}</strong>: {e(v[0])}, {e(v[1])}.</li>" for k, v in ENV.items())
 arch = "".join(f"<li>{e(a)} ({e(i)}): {e(w)}</li>" for a, i, w in ARCHIVED)
@@ -161,7 +241,7 @@ tr.hot{background:var(--hot)}tr.warn{background:var(--warn)}.skip{position:absol
 <main id="main">
 <div class="mark">cl-6.observability@dinis</div>
 <h1>Account 6: the agents, watched</h1>
-<p>As of """ + e(AS_OF) + """. """ + str(len(rows)) + """ live sessions, reported cost USD """ + f"{total:.2f}" + """ in all. The data is <a href="../agents.json">agents.json</a>. Read from session records and wakes only, never transcripts. Cost is what each session reports, not an invoice. Times are UTC unless a wake says Europe/Lisbon (UTC in November).</p>
+<p>As of """ + e(AS_OF) + """. """ + str(len(rows)) + """ live sessions, reported cost USD """ + f"{total:.2f}" + """ in all. The data is <a href="../agents.json">agents.json</a>. Read from session records and wakes only, never transcripts. Cost is what each session reports, not an invoice. Context and cost are read at the time shown in brackets; rows read at 16:50 were not read again at 22:25 and are older. Times are UTC unless a wake says Europe/Lisbon (UTC in November).</p>
 <h2>Flags</h2>
 <ul>
 <li><strong>Handover due (past 50% of the window):</strong> """ + e(", ".join(summary["handover_due"]) or "none") + """.</li>
@@ -174,7 +254,7 @@ tr.hot{background:var(--hot)}tr.warn{background:var(--warn)}.skip{position:absol
 </ul>
 <h2>Sessions, by context used</h2>
 <div class="wrap" tabindex="0" role="region" aria-label="Sessions table"><table>
-<thead><tr><th scope="col">Session</th><th scope="col">Project</th><th scope="col">Model</th><th scope="col">Env</th><th scope="col">Repos</th><th scope="col">Context</th><th scope="col">USD</th><th scope="col">Status</th><th scope="col">Updated</th><th scope="col">Wake</th><th scope="col">Flags</th></tr></thead>
+<thead><tr><th scope="col">Session</th><th scope="col">Project</th><th scope="col">Model</th><th scope="col">Env</th><th scope="col">Repos</th><th scope="col">Context (read at)</th><th scope="col">USD</th><th scope="col">Status</th><th scope="col">Updated</th><th scope="col">Wake</th><th scope="col">Flags</th></tr></thead>
 <tbody>
 """ + "\n".join(trs) + """
 </tbody></table></div>
