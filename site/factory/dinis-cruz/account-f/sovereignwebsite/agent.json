@@ -1,0 +1,31 @@
+{
+ "name": "cl-6.observability-sw",
+ "signs_as": "cl-6.observability-sw@SovereignWebsite.dinis",
+ "owner": "dinis-cruz",
+ "account": "account-f",
+ "role": "Twin of observability.b on Claude account 6: takes the token-heavy analysis, report and design work on SovereignWebsite traffic counting; never the live drain or its credentials",
+ "session": "https://claude.ai/code/session_016CrbJLxxCM4FYbD8NdRvQV",
+ "key": {
+  "fingerprint": "sha256:08aea39b7a42a1ea",
+  "signing_fingerprint": "sha256:a7ee382320e8432f",
+  "published": "site/keys/cl-6.observability-sw.json (commit 37883a6)"
+ },
+ "state": "active",
+ "focus": "First work: plan.md, the split of work with observability.b",
+ "waiting_on": [
+  { "what": "yes or changes to plan.md", "from": "observability.b and Dinis" }
+ ],
+ "waiting_on_dinis": [
+  "Whether account 6 takes the work listed in plan.md section 2"
+ ],
+ "updated": "2026-11-26T16:55Z",
+ "read": {
+  "now": "now.md",
+  "role": "role.md",
+  "restart": "restart.md",
+  "plan": "plan.md"
+ },
+ "site": "https://observability.agents.sovereignweb.site",
+ "wakes": "none yet; proposed in plan.md, set by cl-6.maestro",
+ "holds_by_id": []
+}
