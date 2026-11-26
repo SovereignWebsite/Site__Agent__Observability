@@ -166,6 +166,18 @@ R=_R
 NEW_NAMES={"cl-6.abp@PrompTugal","cl-6.accountant@dinis","cl-6.devops@PrompTugal","cl-6.journalist@PrompTugal","cl-6.conductor@SovereignWebsite","cl-6.onboarding@SovereignWebsite","cl-6.design@dinis","cl-6.librarian@dinis","cl-6.studio@SovereignWebsite"}
 for n in NEW_NAMES: RD[n]="22:25"
 
+# ---- joined from the maestro's pending-wakes.md (public read-only clone, 22:26; dev, depth 1) ----
+PLANNED = {"library":"the section key route lands (IaC PR 25)","events":"key route","live":"key route","videos":"key route","signals":"key route",
+ "cyber":"key route","bulletins":"key route","travel":"its gate change lands","outreach":"the website is attached",
+ "accountant":"the website is attached"}
+_R=[]
+for t in R:
+    t=list(t); k=t[0].split("@")[0].replace("cl-6.","")
+    if t[10].startswith("none found") and t[0].endswith("@PrompTugal") and k in PLANNED:
+        t[10]="none yet; planned, waits on: "+PLANNED[k]
+    _R.append(tuple(t))
+R=_R
+
 rows = []
 for n, proj, model, env, repos, ctx, cost, st, upd, needs, wake in R:
     pct = ctx / WINDOW
@@ -190,8 +202,8 @@ summary = dict(
 )
 out = dict(agent="cl-6.observability@dinis", as_of=AS_OF, window_tokens=WINDOW,
            method="list_sessions, get_session and list_triggers only; no transcript read. Cost is the figure each session reports (usage.cost_usd), not an invoice. Context is used_tokens at the time read.",
-           not_known=["Grants: the maestro's sessions.json and the ABP grants are in repositories this session may not read (grant: this repository only), so repositories attached are counted, not compared with a grant.",
-                      "Wakes: only triggers visible to this account are listed; the maestro's pending-wakes.md was not read."],
+           not_known=["Grants: the ABP grants are in repositories outside my grant, so repositories attached are counted, not compared with a grant. The maestro's sessions.json and cost-events.json were read once (22:26) and are not yet joined row by row.",
+                      "Wakes: the newest 20 wakes of this account read at 22:25; older ones not re-read. Planned wakes come from the maestro's pending-wakes.md (public read-only clone, 26 Nov 22:26, SovereignWebsite/Site__Agent__Maestro__Claude__6, github.com)."],
            environments={k: dict(id=v[0], note=v[1]) for k, v in ENV.items()},
            summary=summary, sessions=rows,
            archived=[dict(name=a, id=i, wake_note=w) for a, i, w in ARCHIVED])

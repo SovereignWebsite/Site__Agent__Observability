@@ -1,11 +1,11 @@
 {
  "agent": "cl-6.observability@dinis",
- "as_of": "2026-11-26T22:25Z",
+ "as_of": "2026-11-26T22:26Z",
  "window_tokens": 1000000,
  "method": "list_sessions, get_session and list_triggers only; no transcript read. Cost is the figure each session reports (usage.cost_usd), not an invoice. Context is used_tokens at the time read.",
  "not_known": [
-  "Grants: the maestro's sessions.json and the ABP grants are in repositories this session may not read (grant: this repository only), so repositories attached are counted, not compared with a grant.",
-  "Wakes: only triggers visible to this account are listed; the maestro's pending-wakes.md was not read."
+  "Grants: the ABP grants are in repositories outside my grant, so repositories attached are counted, not compared with a grant. The maestro's sessions.json and cost-events.json were read once (22:26) and are not yet joined row by row.",
+  "Wakes: the newest 20 wakes of this account read at 22:25; older ones not re-read. Planned wakes come from the maestro's pending-wakes.md (public read-only clone, 26 Nov 22:26, SovereignWebsite/Site__Agent__Maestro__Claude__6, github.com)."
  ],
  "environments": {
   "E1": {
@@ -504,7 +504,7 @@
    "last_activity": "18:38",
    "context_read": "16:50",
    "needs_action": "Whether to allow attaching the website",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: the website is attached",
    "flags": [
     "waiting on a person with a needs_action"
    ]
@@ -670,7 +670,7 @@
    "last_activity": "21:18",
    "context_read": "16:50",
    "needs_action": "Dinis: a cap or ceiling level; where the ledger now lives",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: the website is attached",
    "flags": [
     "waiting on a person with a needs_action"
    ]
@@ -771,7 +771,7 @@
    "last_activity": "18:37",
    "context_read": "16:50",
    "needs_action": "",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: key route",
    "flags": []
   },
   {
@@ -787,7 +787,7 @@
    "last_activity": "18:37",
    "context_read": "16:50",
    "needs_action": "Whether to push its key branch and open the key PR",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: key route",
    "flags": [
     "waiting on a person with a needs_action"
    ]
@@ -805,7 +805,7 @@
    "last_activity": "18:36",
    "context_read": "16:50",
    "needs_action": "The pages.yml anchor decision",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: key route",
    "flags": [
     "waiting on a person with a needs_action"
    ]
@@ -823,7 +823,7 @@
    "last_activity": "18:36",
    "context_read": "16:50",
    "needs_action": "Merge IaC #25; a word to open the key PR",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: key route",
    "flags": [
     "3 repositories attached; its grant is not readable from here, but this is far above the others",
     "waiting on a person with a needs_action"
@@ -842,7 +842,7 @@
    "last_activity": "18:39",
    "context_read": "16:50",
    "needs_action": "",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: key route",
    "flags": []
   },
   {
@@ -858,7 +858,7 @@
    "last_activity": "18:37",
    "context_read": "16:50",
    "needs_action": "",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: key route",
    "flags": []
   },
   {
@@ -874,7 +874,7 @@
    "last_activity": "18:36",
    "context_read": "22:25",
    "needs_action": "",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: the section key route lands (IaC PR 25)",
    "flags": [
     "near 50% of the window"
    ]
@@ -926,7 +926,7 @@
    "last_activity": "18:36",
    "context_read": "16:50",
    "needs_action": "history/** and review/** write access",
-   "wake": "none found",
+   "wake": "none yet; planned, waits on: its gate change lands",
    "flags": [
     "waiting on a person with a needs_action"
    ]

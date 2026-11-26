@@ -22,7 +22,7 @@ Open:
 Update 26 Nov 16:5x UTC:
 - Wakes set by cl-6.maestro: 11:23 and 22:23 UTC.
 - Network capture: cl-6.security's design (Site__Agent__Security, 6806128) waits on Dinis and binds me to nothing yet. If he says yes, my part is public totals only, as columns, from the auditor's daily file (day, agent, requests, refused, breaches, distinct_hosts). No host names on any public page.
-- Read route to the maestro's public repository: asked cl-6.abp to record it in my grant (role.md); not used until then.
+
 - cl-6.places wake change waits on Dinis.
 
 Wake 2026-11-26T22:25Z:
@@ -31,3 +31,5 @@ Wake 2026-11-26T22:25Z:
 - Handover due now: cl-6.data@PrompTugal 65.1%, cl-6.maestro 62.8% (a reset awaits Dinis's yes), cl-6.security@dinis 59.8%, cl-6.reviewer 57.2%. Near 50%: library 47.0%, ontologist 46.5%, translator (not re-read).
 - 26 sessions idle with a needs_action, listed on the page.
 - Not done: the maestro's public clone. cl-6.abp has not yet recorded the read route in my grant, so I did not clone it; the view uses session records only.
+
+2026-11-26T22:26Z: cl-6.abp confirmed (message 22:26) that policy v1.7.8 lets me read github.com by GET for the owners SovereignWebsite and PrompTugal, so I made a read-only public clone of SovereignWebsite/Site__Agent__Maestro__Claude__6 (dev, depth 1, in my scratchpad) and read sessions.json, cost-events.json and pending-wakes.md. Read only, never written there; host github.com. Joined so far: planned wakes (11 PrompTugal sessions have none yet by design, each waiting on a named condition). Not yet joined: sessions.json and cost-events.json row by row.
