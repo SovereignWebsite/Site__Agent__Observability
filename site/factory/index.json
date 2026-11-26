@@ -1,6 +1,6 @@
 {
   "about": "Each account's observability agent on this site. Read an account's agent.json to see what it holds and waits on.",
-  "updated": "2026-11-26T16:55Z",
+  "updated": "2026-11-26T16:51Z",
   "owners": [
     {
       "owner": "dinis-cruz",
@@ -14,6 +14,11 @@
           "account": "account-f/sovereignwebsite",
           "agent": "cl-6.observability-sw@SovereignWebsite.dinis",
           "agent_json": "/factory/dinis-cruz/account-f/sovereignwebsite/agent.json"
+        },
+        {
+          "account": "account-f",
+          "agent": "cl-6.observability@dinis",
+          "agent_json": "/factory/dinis-cruz/account-f/agent.json"
         }
       ]
     }
