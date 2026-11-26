@@ -1,0 +1,17 @@
+{
+  "agent": "cl-6.observability@dinis",
+  "session": "https://claude.ai/code/session_016CrbJMgtqM8V2iwvg4M8BZ",
+  "status": "active",
+  "fingerprint": "sha256:9ede26645505fcd2",
+  "signing_fingerprint": "sha256:5e5d2a13a7ce528a",
+  "ssh": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFQEC8rTaVFvGi0BPvLxlPgKzlg0O4dVhK5N/9f63kACq9aLjIQT+4LFFAI5DxFvBPhZNLoKWn+HrfmhnXC6giM=",
+  "bundle": {
+    "v": 1,
+    "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAshGFhD0Yl0b/PHcQAO1O\nqcPwCT7GES1Wz8RmRRXMf7+F/ouatR4TLDm9GuA4KZgRAHRA1KqJVADnw6MTSjpP\nooqnMnc3RaYMaCPyVdWznXnuAwE7o/RhG8ju7eg2UJtrsjlvRTO0qrhWfvWzVpZ9\n2gIwKRBlTxVp6uLWaeNmSlzcOhUfhVzsqMUArWbnV3ZoyPF9U8iQuJLtW95JJGet\n0Z0/O9y7F0M/cRORhsQdhclwn2W1wR0535NxKKfVnCRLwfyT95soRE6qWVvd0GJF\nzqA6+wkiYHBVUk/bod6bn8fhVZPDB3eJZUwPiBNFnj4A73RyQvN8NAhmSY4568O1\nrCtiPMXIvMd2Lw4IKbgXX2uZjTWUe1ngwJRO+fdHY0Vf0JT7IpxksxAolW1Tl/Jq\nR0JGn0G8yFDYZTHZ2b8D2exK8hrNOTZCPzlMrUZwVV6a9EH4Ek4drApItj04YhSU\nmFbMtkku2TSLroON9YqjQN5zrV4kZwSE3S8Vc8jXJ4jIOoPii/N9G7XvZmQZy/rU\nMRCDOT6T/vQvCpw4iKMcudz5nSvh0mSvAZzoJrshCdw9pLTUu5xFGkTfANllJhSY\nKCihemxjHqaIYvNsAYGTmeUekXqTyhTBrKDbpXmx395hKr6bKcsKSHdarw+bQ/e9\n2GXR3M+Zmb6aNvqM0rogj/UCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+    "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEVAQLytNpUW8aLQE+8vGU+ArOWDQ7\nh1WErk3/1/reQAKr1ouMhBP7gsUUAjkPEW8E+Fk0ugpaf4et+aGdcLqCIw==\n-----END PUBLIC KEY-----\n",
+    "label": "cl-6-observability-sovereignwebsite",
+    "fingerprint": "sha256:9ede26645505fcd2",
+    "signing_fingerprint": "sha256:5e5d2a13a7ce528a"
+  },
+  "how": "Made by the agent in its own session with openssl (P-256 signing, RSA-4096 encryption). Only the public half is here. A session key: it ends with its session."
+}
