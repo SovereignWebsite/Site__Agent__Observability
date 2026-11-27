@@ -114,8 +114,8 @@
     if (/^session_[A-Za-z0-9]+$/.test(ctx)) ctx = 'https://claude.ai/code/' + ctx;
     var u = String(q.urgency || '').trim();
     var first = (u.toLowerCase().match(/^[a-z]+/) || [''])[0];
-    var group = first === 'now' ? 'now' : (first === 'today' || first === 'high') ? 'today' : 'later';
     var deadline = u.replace(/^[A-Za-z]+\s*[:,;-]?\s*/, '').trim();
+    var group = first === 'now' ? 'now' : (first === 'today' || first === 'high' || (deadline && first !== 'low')) ? 'today' : 'later';
     var status = String(q.status || '').toLowerCase();
     return {
       id: q.id || '', title: q.question || q.title || q.what || q.id || 'Question',
@@ -150,6 +150,7 @@
     if (group !== 'done') {
       if (q.line) c.appendChild(paste(q.line, q.id));
       else c.appendChild(el('div', 'noline', 'No line to paste: open the session'));
+      if (!q.where) c.appendChild(el('p', 'meta', 'No session link'));
       if (q.where) {
         var pi = el('p', 'pastein'); pi.appendChild(document.createTextNode('Paste in: '));
         var a = link(q.where, 'Open session'); a.className = 'btn'; pi.appendChild(a); c.appendChild(pi);
@@ -164,13 +165,34 @@
     return c;
   }
 
+  function sessionName(url) {
+    if (!url) return 'no session link';
+    var m = /claude\.ai\/code\/(session_[A-Za-z0-9]+)/.exec(url);
+    if (m) return 'session ' + m[1].slice(-6);
+    var u = String(url).replace(/^https:\/\//, '').replace(/\/$/, '').split('/');
+    return u.slice(0, 3).join('/').slice(0, 60);
+  }
+
+  function capped(box, items, key) {
+    var CAP = 5;
+    items.forEach(function (q, i) { var r = row(q, key); if (i >= CAP) r.hidden = true; box.appendChild(r); });
+    if (items.length > CAP) {
+      var b = el('button', '', 'Show ' + (items.length - CAP) + ' more'); b.type = 'button';
+      b.addEventListener('click', function () { Array.prototype.forEach.call(box.querySelectorAll('.row[hidden]'), function (r) { r.hidden = false; }); b.remove(); });
+      box.appendChild(b);
+    }
+  }
+
   function group(n, key, title, items, collapsed) {
     var box = el(collapsed ? 'details' : 'div', 'grp');
-    if (collapsed && key === 'later' && items.length) box.open = false;
     var head = el(collapsed ? 'summary' : 'h2', 'ghead', title + ' (' + items.length + ')');
     if (collapsed && items.length) head.appendChild(el('span', 'peek', ' ' + items.slice(0, 2).map(function (q) { return q.title.slice(0, 60); }).join(' · ')));
     box.appendChild(head);
-    items.forEach(function (q) { box.appendChild(row(q, key)); });
+    if (key === 'later') {
+      var by = {}, ord = [];
+      items.forEach(function (q) { var k = q.where || ''; if (!by[k]) { by[k] = []; ord.push(k); } by[k].push(q); });
+      ord.forEach(function (k) { var sub = el('div', 'sub'); sub.appendChild(el('h3', 'subhead', sessionName(k) + ' (' + by[k].length + ')')); capped(sub, by[k], key); box.appendChild(sub); });
+    } else capped(box, items, key);
     if (!items.length && !collapsed) box.appendChild(el('p', '', key === 'now' ? 'Nothing needs you now.' : 'Nothing today.'));
     if (items.length || !collapsed) n.appendChild(box);
   }
@@ -182,14 +204,15 @@
     function add(q, wins) {
       var r = norm(q);
       var key = r.id ? 'i:' + r.id : (r.line ? 'l:' + r.line : 'x' + order.length);
-      var lk = r.line && lines[r.line];
+      var nl = r.line ? r.where + '|' + r.line.toLowerCase().replace(/["'`\u2018\u2019\u201c\u201d]/g, '').replace(/\s+/g, ' ').trim() : '';
+      var lk = (r.line && lines[r.line]) || (nl && lines[nl]);
       if (lk) key = lk;
       if (map[key]) {
         var cur = map[key];
         if (wins) { Object.keys(r).forEach(function (f) { if (r[f] !== '' && r[f] !== false) cur[f] = r[f]; }); }
         else Object.keys(r).forEach(function (f) { if (!cur[f] && r[f]) cur[f] = r[f]; });
       } else { map[key] = r; order.push(key); }
-      if (r.line) lines[r.line] = key;
+      if (r.line) { lines[r.line] = key; lines[nl] = key; }
     }
     qs.forEach(function (q) { add(q, true); });
     (waiting || []).forEach(function (w) { add(w, false); });
@@ -301,7 +324,7 @@
         src.cost_events ? get(src.cost_events, 'Cost events (maestro)').then(drawCosts) : null
       ]).then(function () {
         drawSources();
-        document.getElementById('loaded').textContent = 'Briefing updated ' + (b.updated || 'unknown') + '; loaded at ' + new Date().toISOString();
+        document.getElementById('loaded').textContent = 'Loaded ' + new Date().toISOString().slice(11, 16) + ' UTC; briefing updated ' + (b.updated || 'unknown');
       });
     });
   }
