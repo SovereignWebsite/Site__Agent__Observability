@@ -1,6 +1,6 @@
 {
  "agent": "cl-6.observability@dinis",
- "as_of": "2026-11-27T11:24Z",
+ "as_of": "2026-11-27T22:24Z",
  "window_tokens": 1000000,
  "method": "list_sessions, get_session and list_triggers only; no transcript read. Cost is the figure each session reports (usage.cost_usd), not an invoice. Context is used_tokens at the time read.",
  "not_known": [
@@ -24,26 +24,24 @@
  "summary": {
   "sessions_live": 62,
   "archived_listed": 9,
-  "reported_cost_usd_total": 992.61,
+  "reported_cost_usd_total": 1250.23,
   "handover_due": [
    "cl-6.security@dinis",
-   "cl-6.decisions@dinis",
    "cl-6.reviewer@PrompTugal",
    "cl-6.translator@PrompTugal",
    "cl-6.ontologist@PrompTugal",
    "cl-6.library@PrompTugal",
-   "cl-6.journalist@PrompTugal"
+   "cl-6.abp@PrompTugal"
   ],
-  "near_half": [],
-  "near_compaction": [
-   "cl-6.decisions@dinis"
+  "near_half": [
+   "cl-6.conductor@PrompTugal"
   ],
+  "near_compaction": [],
   "more_repos_than_expected": [
    "cl-6.places@PrompTugal"
   ],
   "idle_with_needs_action": [
    "cl-6.conductor@PrompTugal",
-   "cl-6.data.london@PrompTugal",
    "cl-6.conductor@sgit",
    "cl-6.decisions@dinis",
    "cl-6.helm@dinis",
@@ -51,7 +49,6 @@
    "cl-6.programme@PrompTugal",
    "cl-6.curator@PrompTugal",
    "cl-6.customers@PrompTugal",
-   "cl-6.backup@PrompTugal",
    "cl-6.outreach@PrompTugal",
    "cl-6.historian@PrompTugal",
    "cl-6.accountant@PrompTugal",
@@ -61,8 +58,10 @@
    "cl-6.events@PrompTugal",
    "cl-6.civic@PrompTugal",
    "cl-6.travel@PrompTugal",
+   "cl-6.abp@PrompTugal",
    "cl-6.devops@PrompTugal",
    "cl-6.journalist@PrompTugal",
+   "cl-6.conductor@SovereignWebsite",
    "cl-6.librarian@dinis"
   ],
   "wake_into_archived": [],
@@ -99,12 +98,12 @@
    "model": "opus",
    "environment": "E1",
    "repos_attached": 1,
-   "context_used": 217042,
-   "context_pct": 21.7,
-   "reported_cost_usd": 74.52,
-   "status": "RUNNING",
-   "last_activity": "11:21",
-   "context_read": "11:25",
+   "context_used": 436549,
+   "context_pct": 43.7,
+   "reported_cost_usd": 87.55,
+   "status": "IDLE",
+   "last_activity": "21:37",
+   "context_read": "22:25 (27 Nov)",
    "needs_action": "",
    "wake": "36 * * * * (UTC, hourly)",
    "flags": []
@@ -119,7 +118,7 @@
    "context_pct": 0.0,
    "reported_cost_usd": null,
    "status": "RUNNING",
-   "last_activity": "11:23",
+   "last_activity": "22:23",
    "context_read": "16:50",
    "needs_action": "",
    "wake": "23 11,22 * * * (UTC)",
@@ -151,7 +150,7 @@
    "context_pct": 11.2,
    "reported_cost_usd": 0.52,
    "status": "IDLE",
-   "last_activity": "10:19",
+   "last_activity": "17:27",
    "context_read": "16:50",
    "needs_action": "",
    "wake": "47 8 * * 1,3,4,5 (UTC)",
@@ -163,15 +162,16 @@
    "model": "opus",
    "environment": "E2",
    "repos_attached": 1,
-   "context_used": 114071,
-   "context_pct": 11.4,
-   "reported_cost_usd": 1.43,
+   "context_used": 453311,
+   "context_pct": 45.3,
+   "reported_cost_usd": 178.63,
    "status": "IDLE",
-   "last_activity": "10:37",
-   "context_read": "16:50",
-   "needs_action": "Say yes in abp's session, then approve the attach in place.london's session, before 11:59 UTC",
+   "last_activity": "21:17",
+   "context_read": "22:25 (27 Nov)",
+   "needs_action": "Journalist website access first; then 7 more items, starting with the strikes-site go-ahead",
    "wake": "none found",
    "flags": [
+    "near 50% of the window",
     "waiting on a person with a needs_action"
    ]
   },
@@ -185,7 +185,7 @@
    "context_pct": 11.6,
    "reported_cost_usd": 0.62,
    "status": "IDLE",
-   "last_activity": "10:36",
+   "last_activity": "18:26",
    "context_read": "16:50",
    "needs_action": "",
    "wake": "25 7,18 * * * (Europe/Lisbon)",
@@ -201,13 +201,11 @@
    "context_pct": 11.0,
    "reported_cost_usd": 0.55,
    "status": "IDLE",
-   "last_activity": "06:24",
+   "last_activity": "17:23",
    "context_read": "16:50",
-   "needs_action": "Decide whether api.tfl.gov.uk may be used (abp, security, rights, Dinis)",
+   "needs_action": "",
    "wake": "23 6,17 * * * (UTC)",
-   "flags": [
-    "waiting on a person with a needs_action"
-   ]
+   "flags": []
   },
   {
    "name": "cl-6.conductor@CBR",
@@ -254,7 +252,7 @@
    "reported_cost_usd": 42.18,
    "status": "IDLE",
    "last_activity": "07:24",
-   "context_read": "11:25",
+   "context_read": "11:25 (27 Nov)",
    "needs_action": "",
    "wake": "none found",
    "flags": [
@@ -267,17 +265,15 @@
    "model": "opus",
    "environment": "E1",
    "repos_attached": 1,
-   "context_used": 762858,
-   "context_pct": 76.3,
-   "reported_cost_usd": 160.75,
+   "context_used": 293506,
+   "context_pct": 29.4,
+   "reported_cost_usd": 182.57,
    "status": "IDLE",
-   "last_activity": "10:49",
-   "context_read": "11:25",
-   "needs_action": "Type \"yes, start the strikes session\" in the maestro's session; strike window ends 11:59 UTC",
+   "last_activity": "20:50",
+   "context_read": "22:25 (27 Nov)",
+   "needs_action": "Reply with the footer wording: (a), (b), (c) or your own",
    "wake": "none found",
    "flags": [
-    "handover due (past 50% of the window)",
-    "within 10% of the auto-compaction threshold",
     "waiting on a person with a needs_action"
    ]
   },
@@ -393,7 +389,7 @@
    "context_pct": 36.9,
    "reported_cost_usd": 9.79,
    "status": "IDLE",
-   "last_activity": "19:15",
+   "last_activity": "19:14",
    "context_read": "16:50",
    "needs_action": "",
    "wake": "13 8,19 * * * (Europe/Lisbon)",
@@ -409,7 +405,7 @@
    "context_pct": 22.5,
    "reported_cost_usd": 3.78,
    "status": "IDLE",
-   "last_activity": "19:06",
+   "last_activity": "20:33",
    "context_read": "16:50",
    "needs_action": "Attach the website with push to the journalist's session",
    "wake": "47 7,18 * * * (Europe/Lisbon)",
@@ -423,12 +419,12 @@
    "model": "sonnet",
    "environment": "E1",
    "repos_attached": 2,
-   "context_used": 613301,
-   "context_pct": 61.3,
-   "reported_cost_usd": 24.49,
+   "context_used": 650822,
+   "context_pct": 65.1,
+   "reported_cost_usd": 29.43,
    "status": "IDLE",
-   "last_activity": "08:04",
-   "context_read": "11:25",
+   "last_activity": "19:03",
+   "context_read": "22:25 (27 Nov)",
    "needs_action": "",
    "wake": "3 8,19 * * * (Europe/Lisbon)",
    "flags": [
@@ -445,9 +441,9 @@
    "context_pct": 16.6,
    "reported_cost_usd": 1.91,
    "status": "IDLE",
-   "last_activity": "19:43",
+   "last_activity": "19:44",
    "context_read": "16:50",
-   "needs_action": "Decide P5 and P11; add its key to board/keys.json",
+   "needs_action": "Add its key to board/keys.json; decide P5 and P11",
    "wake": "43 8,19 * * * (Europe/Lisbon)",
    "flags": [
     "waiting on a person with a needs_action"
@@ -481,11 +477,9 @@
    "status": "IDLE",
    "last_activity": "21:04",
    "context_read": "16:50",
-   "needs_action": "Backup destination; history/** and add_repo; reads of other PrompTugal repos",
+   "needs_action": "",
    "wake": "3 10,21 * * * (Europe/Lisbon)",
-   "flags": [
-    "waiting on a person with a needs_action"
-   ]
+   "flags": []
   },
   {
    "name": "cl-6.outreach@PrompTugal",
@@ -561,12 +555,12 @@
    "model": "sonnet",
    "environment": "E1",
    "repos_attached": 2,
-   "context_used": 651041,
-   "context_pct": 65.1,
-   "reported_cost_usd": 30.46,
+   "context_used": 690837,
+   "context_pct": 69.1,
+   "reported_cost_usd": 35.87,
    "status": "IDLE",
-   "last_activity": "09:25",
-   "context_read": "11:25",
+   "last_activity": "20:05",
+   "context_read": "22:25 (27 Nov)",
    "needs_action": "",
    "wake": "3 9,20 * * * (Europe/Lisbon)",
    "flags": [
@@ -643,12 +637,12 @@
    "model": "sonnet",
    "environment": "E1",
    "repos_attached": 2,
-   "context_used": 642467,
-   "context_pct": 64.2,
-   "reported_cost_usd": 30.61,
+   "context_used": 648132,
+   "context_pct": 64.8,
+   "reported_cost_usd": 33.29,
    "status": "IDLE",
-   "last_activity": "08:37",
-   "context_read": "11:25",
+   "last_activity": "19:36",
+   "context_read": "22:25 (27 Nov)",
    "needs_action": "",
    "wake": "33 8,19 * * * (Europe/Lisbon)",
    "flags": [
@@ -870,7 +864,7 @@
    "reported_cost_usd": 29.26,
    "status": "IDLE",
    "last_activity": "07:26",
-   "context_read": "11:25",
+   "context_read": "11:25 (27 Nov)",
    "needs_action": "",
    "wake": "none yet; planned, waits on: the section key route lands (IaC PR 25)",
    "flags": [
@@ -956,7 +950,7 @@
    "reported_cost_usd": 47.8,
    "status": "IDLE",
    "last_activity": "10:55",
-   "context_read": "11:25",
+   "context_read": "11:25 (27 Nov)",
    "needs_action": "",
    "wake": "3 7,18 * * * (Europe/Lisbon)",
    "flags": []
@@ -967,15 +961,18 @@
    "model": "sonnet",
    "environment": "E2",
    "repos_attached": 1,
-   "context_used": 298447,
-   "context_pct": 29.8,
-   "reported_cost_usd": 7.13,
+   "context_used": 526344,
+   "context_pct": 52.6,
+   "reported_cost_usd": 26.64,
    "status": "IDLE",
-   "last_activity": "10:49",
-   "context_read": "22:25",
-   "needs_action": "",
+   "last_activity": "21:38",
+   "context_read": "22:25 (27 Nov)",
+   "needs_action": "Held items: pin/re-pin, P11 c, P5, P15 to P20, six records, key PRs, tagline, journalist attach",
    "wake": "37 10,21 * * * (Europe/Lisbon)",
-   "flags": []
+   "flags": [
+    "handover due (past 50% of the window)",
+    "waiting on a person with a needs_action"
+   ]
   },
   {
    "name": "cl-6.accountant@dinis",
@@ -1003,9 +1000,9 @@
    "context_pct": 12.7,
    "reported_cost_usd": 1.09,
    "status": "IDLE",
-   "last_activity": "08:08",
+   "last_activity": "19:08",
    "context_read": "22:25",
-   "needs_action": "Add the website repo (add_repo) so it can check CI, releases and deploys",
+   "needs_action": "Dinis's word to add_repo, so the website repo is added to this session",
    "wake": "7 8,19 * * * (Europe/Lisbon)",
    "flags": [
     "waiting on a person with a needs_action"
@@ -1017,16 +1014,15 @@
    "model": "sonnet",
    "environment": "E1",
    "repos_attached": 1,
-   "context_used": 692843,
-   "context_pct": 69.3,
-   "reported_cost_usd": 31.17,
+   "context_used": 129835,
+   "context_pct": 13.0,
+   "reported_cost_usd": 44.2,
    "status": "IDLE",
-   "last_activity": "08:15",
-   "context_read": "11:25",
-   "needs_action": "Attach the website or restore push access (403) before 12:00 UTC",
+   "last_activity": "19:27",
+   "context_read": "22:25 (27 Nov)",
+   "needs_action": "Push access to newsroom/build/features/tube-chart.mjs, or have cl-6.dev change it",
    "wake": "57 7,18 * * * (Europe/Lisbon)",
    "flags": [
-    "handover due (past 50% of the window)",
     "waiting on a person with a needs_action"
    ]
   },
@@ -1040,11 +1036,13 @@
    "context_pct": 21.8,
    "reported_cost_usd": 5.76,
    "status": "IDLE",
-   "last_activity": "09:51",
+   "last_activity": "18:48",
    "context_read": "22:25",
-   "needs_action": "",
+   "needs_action": "Where the Google Search API access lives; a line for factory.b; decisions 2 to 4 in map.md; a route for the signer-check patch",
    "wake": "47 9,18 * * * (UTC)",
-   "flags": []
+   "flags": [
+    "waiting on a person with a needs_action"
+   ]
   },
   {
    "name": "cl-6.onboarding@SovereignWebsite",
@@ -1056,7 +1054,7 @@
    "context_pct": 14.1,
    "reported_cost_usd": 1.54,
    "status": "IDLE",
-   "last_activity": "08:08",
+   "last_activity": "16:08",
    "context_read": "22:25",
    "needs_action": "",
    "wake": "7 8,16 * * * (UTC)",
@@ -1072,7 +1070,7 @@
    "context_pct": 14.9,
    "reported_cost_usd": 1.19,
    "status": "IDLE",
-   "last_activity": "10:51",
+   "last_activity": "20:41",
    "context_read": "22:25",
    "needs_action": "",
    "wake": "41 8,12,16,20 * * * (UTC)",
@@ -1106,7 +1104,7 @@
    "context_pct": 25.5,
    "reported_cost_usd": 5.22,
    "status": "IDLE",
-   "last_activity": "10:19",
+   "last_activity": "20:19",
    "context_read": "22:25",
    "needs_action": "",
    "wake": "17 10,20 * * * (UTC)",

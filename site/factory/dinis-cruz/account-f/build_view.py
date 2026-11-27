@@ -211,11 +211,42 @@ NEEDS2 = {"cl-6.devops@PrompTugal":"Add the website repo (add_repo) so it can ch
 _R=[]
 for t in R:
     t=list(t); n=t[0]
-    if n in GET2: t[5],t[6],t[7],t[9]=GET2[n]; RD[n]="11:25"
+    if n in GET2: t[5],t[6],t[7],t[9]=GET2[n]; RD[n]="11:25 (27 Nov)"
     if n in TIME2: t[8]=TIME2[n]
     if n in NEEDS2: t[9]=NEEDS2[n]
     if n in ("cl-6.maestro@dinis",): t[7]="RUNNING"
     if n in ("cl-6.observability-sw@SovereignWebsite","cl-6.data.london@PrompTugal","cl-6.place.london@PrompTugal"): t[7]="IDLE"
+    _R.append(tuple(t))
+R=_R
+
+# ---- delta of the 27 Nov 22:23 wake ----
+GET3 = {
+ "cl-6.decisions@dinis":(293506,182.57,"IDLE","Reply with the footer wording: (a), (b), (c) or your own"),
+ "cl-6.maestro@dinis":(436549,87.55,"IDLE",""),
+ "cl-6.journalist@PrompTugal":(129835,44.20,"IDLE","Push access to newsroom/build/features/tube-chart.mjs, or have cl-6.dev change it"),
+ "cl-6.translator@PrompTugal":(690837,35.87,"IDLE",""),
+ "cl-6.ontologist@PrompTugal":(648132,33.29,"IDLE",""),
+ "cl-6.reviewer@PrompTugal":(650822,29.43,"IDLE",""),
+ "cl-6.abp@PrompTugal":(526344,26.64,"IDLE","Held items: pin/re-pin, P11 c, P5, P15 to P20, six records, key PRs, tagline, journalist attach"),
+ "cl-6.conductor@PrompTugal":(453311,178.63,"IDLE","Journalist website access first; then 7 more items, starting with the strikes-site go-ahead"),
+}
+TIME3 = {"cl-6.decisions@dinis":"20:50","cl-6.maestro@dinis":"21:37","cl-6.journalist@PrompTugal":"19:27","cl-6.translator@PrompTugal":"20:05",
+ "cl-6.ontologist@PrompTugal":"19:36","cl-6.reviewer@PrompTugal":"19:03","cl-6.abp@PrompTugal":"21:38","cl-6.conductor@PrompTugal":"21:17",
+ "cl-6.conductor@SovereignWebsite":"18:48","cl-6.devops@PrompTugal":"19:08","cl-6.design@dinis":"20:41","cl-6.studio@SovereignWebsite":"20:19",
+ "cl-6.social@dinis":"17:27","cl-6.analyst@PrompTugal":"18:54","cl-6.programme@PrompTugal":"18:44","cl-6.checker@PrompTugal":"19:14","cl-6.curator@PrompTugal":"20:33",
+ "cl-6.customers@PrompTugal":"19:44","cl-6.investors@PrompTugal":"20:34","cl-6.backup@PrompTugal":"21:04","cl-6.data.london@PrompTugal":"17:23",
+ "cl-6.place.london@PrompTugal":"18:26","cl-6.onboarding@SovereignWebsite":"16:08","cl-6.observability@dinis":"22:23"}
+NEEDS3 = {"cl-6.conductor@SovereignWebsite":"Where the Google Search API access lives; a line for factory.b; decisions 2 to 4 in map.md; a route for the signer-check patch",
+ "cl-6.devops@PrompTugal":"Dinis's word to add_repo, so the website repo is added to this session",
+ "cl-6.reviewer@PrompTugal":"", "cl-6.social@dinis":"", "cl-6.studio@SovereignWebsite":"", "cl-6.design@dinis":"", "cl-6.analyst@PrompTugal":"",
+ "cl-6.customers@PrompTugal":"Add its key to board/keys.json; decide P5 and P11", "cl-6.backup@PrompTugal":"",
+ "cl-6.data.london@PrompTugal":"", "cl-6.place.london@PrompTugal":""}
+_R=[]
+for t in R:
+    t=list(t); n=t[0]
+    if n in GET3: t[5],t[6],t[7],t[9]=GET3[n]; RD[n]="22:25 (27 Nov)"
+    if n in TIME3: t[8]=TIME3[n]
+    if n in NEEDS3: t[9]=NEEDS3[n]
     _R.append(tuple(t))
 R=_R
 
@@ -294,7 +325,7 @@ tr.hot{background:var(--hot)}tr.warn{background:var(--warn)}.skip{position:absol
 <main id="main">
 <div class="mark">cl-6.observability@dinis</div>
 <h1>Account 6: the agents, watched</h1>
-<p>As of """ + e(AS_OF) + """. """ + str(len(rows)) + """ live sessions, reported cost USD """ + f"{total:.2f}" + """ in all. The data is <a href="../agents.json">agents.json</a>. Read from session records and wakes only, never transcripts. Cost is what each session reports, not an invoice. Context and cost are read at the time shown in brackets (UTC, 26 Nov unless 11:25, which is 27 Nov); rows still at 16:50 are older. Times are UTC unless a wake says Europe/Lisbon (UTC in November).</p>
+<p>As of """ + e(AS_OF) + """. """ + str(len(rows)) + """ live sessions, reported cost USD """ + f"{total:.2f}" + """ in all. The data is <a href="../agents.json">agents.json</a>. Read from session records and wakes only, never transcripts. Cost is what each session reports, not an invoice. Context and cost are read at the time shown in brackets (UTC; 11:25 and 22:25 are 27 Nov, the others 26 Nov unless a date is shown); rows still at 16:50 are older. Times are UTC unless a wake says Europe/Lisbon (UTC in November).</p>
 <h2>Flags</h2>
 <ul>
 <li><strong>Handover due (past 50% of the window):</strong> """ + e(", ".join(summary["handover_due"]) or "none") + """.</li>

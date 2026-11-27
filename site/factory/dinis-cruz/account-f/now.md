@@ -51,3 +51,8 @@ Wake 2026-11-27T11:24Z (27 Nov): refreshed from list_sessions, get_session (11 s
 - Two new sessions: cl-6.website@sgit.dinis (repository in the SGit-AI organisation) and cl-6.conductor@SGSend.dinis (repository in the-cyber-boardroom). Neither has a wake. Their repositories are under other owners than PrompTugal and SovereignWebsite; I cannot read their grants.
 - Wakes into archived sessions: none (newest 12 checked). cl-6.places still 38 repositories.
 - Read the maestro's repository (public clone, github.com, read only): sessions.json (updated 27 Nov 01:37), pending-wakes.md. Not yet joined row by row.
+
+Wake 2026-11-27T22:24Z (27 Nov): refreshed from list_sessions and get_session (10 sessions). 62 live sessions, reported cost USD 1,250.23 (not all rows re-read; the page marks each).
+- Handover due: translator 69.1%, reviewer 65.1%, security@dinis 64.9% (last read 07:24), ontologist 64.8%, library 63.2% (last read 07:26), and cl-6.abp 52.6% (new). Resolved by compaction or reset: cl-6.decisions (29.4%) and cl-6.journalist (13.0%). Maestro 43.7%, conductor@PrompTugal 45.3%.
+- No new sessions in the first 30 listed. Wakes into archived sessions: not re-listed this wake (no session was replaced).
+- Largest reported cost: decisions 182.57, conductor@PrompTugal 178.63, security@PrompTugal 148.26 (last read 26 Nov).
