@@ -48,22 +48,6 @@
     return box;
   }
 
-  function drawWait(list) {
-    var n = clear('wait');
-    var rank = { high: 0, medium: 1, low: 2 };
-    (list || []).slice().sort(function (a, b) { return (rank[a.urgency] === undefined ? 3 : rank[a.urgency]) - (rank[b.urgency] === undefined ? 3 : rank[b.urgency]); }).forEach(function (w) {
-      var c = el('div', 'card ' + (rank[w.urgency] !== undefined ? w.urgency : ''));
-      var p = el('p');
-      p.appendChild(el('span', 'tag', w.urgency || 'n/a'));
-      p.appendChild(document.createTextNode(w.what || ''));
-      c.appendChild(p);
-      if (w.where) { var q = el('p', 'muted'); q.appendChild(document.createTextNode('Where: ')); q.appendChild(link(w.where, w.where)); c.appendChild(q); }
-      if (w.line) { c.appendChild(el('p', 'muted', 'Paste this line:')); c.appendChild(paste(w.line)); }
-      n.appendChild(c);
-    });
-    if (!n.firstChild) n.appendChild(el('p', '', 'Nothing is waiting on Dinis.'));
-  }
-
   function draftCard(d) {
     var c = el('div', 'card');
     c.appendChild(el('h3', '', (d.title || d.id || 'Draft') + (d.status ? ' (' + d.status + ')' : '')));
@@ -114,55 +98,67 @@
   }
 
 
-  // Both field sets are read: decisions' (question, line_to_paste, context_url, since, answer_url) and the earlier (title, line_for_dinis, session, opened, closed).
-  function qNorm(q) {
-    var ctx = q.context_url || q.session || '';
+  // One list from briefing.json waiting_on_dinis[] and decisions' questions.json. Both field sets are read:
+  // (question, line_to_paste, context_url, since, asked_by, answer_url) and (what, line, where, id, urgency).
+  function norm(q, from) {
+    var ctx = q.context_url || q.session || q.where || '';
     if (/^session_[A-Za-z0-9]+$/.test(ctx)) ctx = 'https://claude.ai/code/' + ctx;
-    var u = String(q.urgency || '').toLowerCase();
-    var level = /^(now|high|urgent)/.test(u) ? 'high' : /^(next|medium|soon)/.test(u) ? 'medium' : /^low/.test(u) ? 'low' : '';
+    var u = String(q.urgency || '');
+    var lu = u.toLowerCase();
+    var rank = /^(now|urgent)/.test(lu) ? 0 : /^high/.test(lu) ? 1 : /^(next|medium|soon)/.test(lu) ? 2 : /^low/.test(lu) ? 3 : 4;
     var status = String(q.status || '').toLowerCase();
+    // A deadline is any urgency text that says more than the bare level word.
+    var extra = u.replace(/^\s*(now|urgent|high|next|medium|soon|low)\s*[:,;-]?\s*/i, '').trim();
     return {
-      title: q.question || q.title || q.id || 'Question',
-      line: q.line_to_paste || q.line_for_dinis || '',
-      where: ctx, answer: q.answer_url || '',
-      opened: q.since || q.opened || '', closed: q.closed || '',
-      by: q.asked_by || '', urgency: q.urgency || '', level: level, status: status,
+      id: q.id || '', title: q.question || q.title || q.what || q.id || 'Question',
+      line: q.line_to_paste || q.line_for_dinis || q.line || '',
+      where: ctx, answer: q.answer_url || '', opened: q.since || q.opened || '', closed: q.closed || '',
+      by: q.asked_by || '', level: u, rank: rank, deadline: extra, status: status, from: from,
       done: !!q.closed || /^(answered|withdrawn|closed|done|dropped)/.test(status)
     };
   }
 
-  function qCard(q, open) {
-    var c = el('div', 'card ' + (open ? q.level : ''));
-    var p = el('p');
-    p.appendChild(el('span', 'tag', open ? (q.urgency || 'n/a') : (q.status || 'answered')));
-    p.appendChild(document.createTextNode(q.title));
-    c.appendChild(p);
-    var when = [];
-    if (q.by) when.push('asked by ' + q.by);
-    if (q.opened) when.push('opened ' + q.opened);
-    if (q.closed) when.push('closed ' + q.closed);
-    if (q.status) when.push('status: ' + q.status);
-    if (when.length) c.appendChild(el('p', 'muted', when.join('; ')));
-    if (open && q.line) { c.appendChild(el('p', 'muted', 'Paste this line:')); c.appendChild(paste(q.line)); }
-    else if (q.line) c.appendChild(el('p', 'muted', 'Line: ' + q.line));
-    if (q.where) { var s = el('p', 'muted'); s.appendChild(document.createTextNode('Where: ')); s.appendChild(link(q.where, q.where)); c.appendChild(s); }
-    if (q.answer) { var t = el('p', 'muted'); t.appendChild(document.createTextNode('Answer: ')); t.appendChild(link(q.answer, q.answer)); c.appendChild(t); }
+  function row(q, open) {
+    var c = el('div', 'row' + (open ? ' r' + q.rank : ' done'));
+    var top = el('div', 'rtop');
+    var lvl = open ? (q.rank === 0 ? 'NOW' : q.rank === 1 ? 'HIGH' : q.rank === 2 ? 'NEXT' : q.rank === 3 ? 'LOW' : (q.level || '').toUpperCase()) : (q.status || 'answered');
+    top.appendChild(el('span', 'tag', lvl));
+    top.appendChild(el('strong', 'rtitle', q.title));
+    c.appendChild(top);
+    if (open && q.deadline) c.appendChild(el('p', 'deadline', 'Deadline: ' + q.deadline));
+    if (q.line) { c.appendChild(paste(q.line)); }
+    var meta = el('p', 'muted');
+    var bits = [];
+    if (q.by) bits.push('asked by ' + q.by);
+    if (q.opened) bits.push('since ' + q.opened);
+    if (q.closed) bits.push('closed ' + q.closed);
+    meta.appendChild(document.createTextNode(bits.join(' · ')));
+    if (q.where) { if (bits.length) meta.appendChild(document.createTextNode(' · ')); meta.appendChild(link(q.where, 'open the session')); }
+    if (q.answer) { meta.appendChild(document.createTextNode(' · ')); meta.appendChild(link(q.answer, 'answer')); }
+    if (meta.firstChild) c.appendChild(meta);
     return c;
   }
 
-  function drawQuestions(d) {
-    var n = clear('questions');
-    if (!d) { n.appendChild(el('p', 'bad', 'The questions file did not load. See Sources.')); return; }
-    var list = (Array.isArray(d) ? d : (d.questions || d.items || [])).map(qNorm);
-    var rank = { high: 0, medium: 1, low: 2 };
-    function r(q) { return rank[q.level] === undefined ? 3 : rank[q.level]; }
-    var open = list.filter(function (q) { return !q.done; }).sort(function (a, b) { return r(a) - r(b); });
-    var done = list.filter(function (q) { return q.done; }).sort(function (a, b) { return String(b.closed || b.opened).localeCompare(String(a.closed || a.opened)); });
-    open.forEach(function (q) { n.appendChild(qCard(q, true)); });
-    if (!open.length) n.appendChild(el('p', '', 'No open questions.'));
+  function drawNeeds(waiting, qdata, qfailed) {
+    var n = clear('needs');
+    var qs = qdata ? (Array.isArray(qdata) ? qdata : (qdata.questions || qdata.items || [])) : [];
+    var all = (waiting || []).map(function (w) { return norm(w, 'briefing'); }).concat(qs.map(function (q) { return norm(q, 'questions'); }));
+    // No duplicates: the same id, or the same line to paste, shows once (the questions file wins, it has more fields).
+    var seen = {}, list = [];
+    all.slice().sort(function (a, b) { return (a.from === 'questions' ? 0 : 1) - (b.from === 'questions' ? 0 : 1); }).forEach(function (q) {
+      var k1 = q.id && 'i:' + q.id, k2 = q.line && 'l:' + q.line;
+      if ((k1 && seen[k1]) || (k2 && seen[k2])) return;
+      if (k1) seen[k1] = 1; if (k2) seen[k2] = 1;
+      list.push(q);
+    });
+    if (qfailed) n.appendChild(el('p', 'bad', 'The questions file did not load, so only the briefing items are shown.'));
+    var open = list.filter(function (q) { return !q.done; }).sort(function (a, b) { return a.rank - b.rank; });
+    var done = list.filter(function (q) { return q.done; });
+    open.forEach(function (q) { n.appendChild(row(q, true)); });
+    if (!open.length) n.appendChild(el('p', '', 'Nothing is waiting on Dinis.'));
     if (done.length) {
       var det = el('details'); det.appendChild(el('summary', '', 'Answered or withdrawn (' + done.length + ')'));
-      done.forEach(function (q) { det.appendChild(qCard(q, false)); });
+      done.forEach(function (q) { det.appendChild(row(q, false)); });
       n.appendChild(det);
     }
   }
@@ -236,19 +232,19 @@
     document.getElementById('loaded').textContent = 'Loading...';
     get(SPINE, 'Briefing (maestro)').then(function (b) {
       if (!b) {
-        ['wait', 'review', 'projects', 'questions'].forEach(function (id) { var n = clear(id); n.appendChild(el('p', 'bad', 'The briefing did not load, so this is empty. See Sources.')); });
+        ['needs', 'review', 'projects'].forEach(function (id) { var n = clear(id); n.appendChild(el('p', 'bad', 'The briefing did not load, so this is empty. See Sources.')); });
         clear('decisions'); clear('costs'); clear('flags'); drawSources();
         document.getElementById('loaded').textContent = 'Failed at ' + new Date().toISOString();
         return;
       }
       var src = b.sources || {};
-      drawWait(b.waiting_on_dinis);
       drawProjects(b.projects);
       drawDecisions(b.decisions);
+      var qp = get(src.questions || QUESTIONS, 'Questions (decisions)').then(function (q) { drawNeeds(b.waiting_on_dinis, q, !q); });
       return Promise.all([
+        qp,
         drawReview(b.to_review),
         src.agents_view ? get(src.agents_view, 'Agents view (observability)').then(drawFlags) : null,
-        get(src.questions || QUESTIONS, 'Questions (decisions)').then(drawQuestions),
         src.sessions ? get(src.sessions, 'Sessions (maestro)') : null,
         src.cost_events ? get(src.cost_events, 'Cost events (maestro)').then(drawCosts) : null
       ]).then(function () {
