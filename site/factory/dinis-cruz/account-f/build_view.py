@@ -178,6 +178,47 @@ for t in R:
     _R.append(tuple(t))
 R=_R
 
+# ---- delta of the 27 Nov 11:23 wake ----
+R += [
+ ("cl-6.website@sgit.dinis","sgit","sonnet","E2",1,108812,0.63,"IDLE","01:43","","none found"),
+ ("cl-6.conductor@SGSend.dinis","SGSend","opus","E2",1,355442,9.12,"IDLE","02:03","","none found"),
+]
+for _n in ("cl-6.website@sgit.dinis","cl-6.conductor@SGSend.dinis"): RD[_n]="11:25"
+GET2 = {
+ "cl-6.maestro@dinis":(217042,74.52,"RUNNING",""),
+ "cl-6.security@dinis":(648768,42.18,"IDLE",""),
+ "cl-6.decisions@dinis":(762858,160.75,"IDLE","Type \"yes, start the strikes session\" in the maestro's session; strike window ends 11:59 UTC"),
+ "cl-6.reviewer@PrompTugal":(613301,24.49,"IDLE",""),
+ "cl-6.data@PrompTugal":(331037,47.80,"IDLE",""),
+ "cl-6.journalist@PrompTugal":(692843,31.17,"IDLE","Attach the website or restore push access (403) before 12:00 UTC"),
+ "cl-6.ontologist@PrompTugal":(465084 if False else 642467,30.61,"IDLE",""),
+ "cl-6.library@PrompTugal":(632034,29.26,"IDLE",""),
+ "cl-6.translator@PrompTugal":(651041,30.46,"IDLE",""),
+}
+TIME2 = {"cl-6.maestro@dinis":"11:21","cl-6.security@dinis":"07:24","cl-6.decisions@dinis":"10:49","cl-6.reviewer@PrompTugal":"08:04","cl-6.data@PrompTugal":"10:55",
+ "cl-6.journalist@PrompTugal":"08:15","cl-6.ontologist@PrompTugal":"08:37","cl-6.library@PrompTugal":"07:26","cl-6.translator@PrompTugal":"09:25",
+ "cl-6.devops@PrompTugal":"08:08","cl-6.abp@PrompTugal":"10:49","cl-6.conductor@PrompTugal":"10:37","cl-6.conductor@SovereignWebsite":"09:51",
+ "cl-6.design@dinis":"10:51","cl-6.studio@SovereignWebsite":"10:19","cl-6.social@dinis":"10:19","cl-6.place.london@PrompTugal":"10:36","cl-6.data.london@PrompTugal":"06:24",
+ "cl-6.observability@dinis":"11:23","cl-6.onboarding@SovereignWebsite":"08:08","cl-6.observability-sw@SovereignWebsite":"08:15"}
+NEEDS2 = {"cl-6.devops@PrompTugal":"Add the website repo (add_repo) so it can check CI, releases and deploys",
+ "cl-6.data.london@PrompTugal":"Decide whether api.tfl.gov.uk may be used (abp, security, rights, Dinis)",
+ "cl-6.conductor@PrompTugal":"Say yes in abp's session, then approve the attach in place.london's session, before 11:59 UTC",
+ "cl-6.conductor@SovereignWebsite":"", "cl-6.social@dinis":"", "cl-6.studio@SovereignWebsite":"", "cl-6.place.london@PrompTugal":"",
+ "cl-6.curator@PrompTugal":"Attach the website with push to the journalist's session",
+ "cl-6.reviewer@PrompTugal":"", "cl-6.customers@PrompTugal":"Decide P5 and P11; add its key to board/keys.json",
+ "cl-6.programme@PrompTugal":"Decide the agenda; history/** in the ABP grant", "cl-6.historian@PrompTugal":"history/** path in its grant; clones outside it; the hook kit",
+ "cl-6.checker@PrompTugal":"", "cl-6.backup@PrompTugal":"Backup destination; history/** and add_repo; reads of other PrompTugal repos"}
+_R=[]
+for t in R:
+    t=list(t); n=t[0]
+    if n in GET2: t[5],t[6],t[7],t[9]=GET2[n]; RD[n]="11:25"
+    if n in TIME2: t[8]=TIME2[n]
+    if n in NEEDS2: t[9]=NEEDS2[n]
+    if n in ("cl-6.maestro@dinis",): t[7]="RUNNING"
+    if n in ("cl-6.observability-sw@SovereignWebsite","cl-6.data.london@PrompTugal","cl-6.place.london@PrompTugal"): t[7]="IDLE"
+    _R.append(tuple(t))
+R=_R
+
 rows = []
 for n, proj, model, env, repos, ctx, cost, st, upd, needs, wake in R:
     pct = ctx / WINDOW
@@ -253,7 +294,7 @@ tr.hot{background:var(--hot)}tr.warn{background:var(--warn)}.skip{position:absol
 <main id="main">
 <div class="mark">cl-6.observability@dinis</div>
 <h1>Account 6: the agents, watched</h1>
-<p>As of """ + e(AS_OF) + """. """ + str(len(rows)) + """ live sessions, reported cost USD """ + f"{total:.2f}" + """ in all. The data is <a href="../agents.json">agents.json</a>. Read from session records and wakes only, never transcripts. Cost is what each session reports, not an invoice. Context and cost are read at the time shown in brackets; rows read at 16:50 were not read again at 22:25 and are older. Times are UTC unless a wake says Europe/Lisbon (UTC in November).</p>
+<p>As of """ + e(AS_OF) + """. """ + str(len(rows)) + """ live sessions, reported cost USD """ + f"{total:.2f}" + """ in all. The data is <a href="../agents.json">agents.json</a>. Read from session records and wakes only, never transcripts. Cost is what each session reports, not an invoice. Context and cost are read at the time shown in brackets (UTC, 26 Nov unless 11:25, which is 27 Nov); rows still at 16:50 are older. Times are UTC unless a wake says Europe/Lisbon (UTC in November).</p>
 <h2>Flags</h2>
 <ul>
 <li><strong>Handover due (past 50% of the window):</strong> """ + e(", ".join(summary["handover_due"]) or "none") + """.</li>
