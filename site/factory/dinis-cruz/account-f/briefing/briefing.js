@@ -3,6 +3,7 @@
 (function () {
   'use strict';
   var SPINE = 'https://raw.githubusercontent.com/SovereignWebsite/Site__Agent__Maestro__Claude__6/dev/site/factory/dinis-cruz/account-f/briefing.json';
+  var QUESTIONS = 'https://raw.githubusercontent.com/SovereignWebsite/Site__Agent__Decisions/dev/site/factory/dinis-cruz/account-f/questions.json';
   var OK = /^https:\/\/raw\.githubusercontent\.com\/SovereignWebsite\//;
   var status = [];
 
@@ -112,6 +113,43 @@
     return Promise.all(jobs);
   }
 
+
+  function qCard(q, open) {
+    var rank = { high: 'high', medium: 'medium', low: 'low' };
+    var c = el('div', 'card ' + (open && rank[q.urgency] ? q.urgency : ''));
+    var p = el('p');
+    p.appendChild(el('span', 'tag', open ? (q.urgency || 'n/a') : 'answered'));
+    p.appendChild(document.createTextNode(q.title || q.id || 'Question'));
+    c.appendChild(p);
+    var when = [];
+    if (q.opened) when.push('opened ' + q.opened);
+    if (q.closed) when.push('closed ' + q.closed);
+    if (q.status) when.push('status: ' + q.status);
+    if (when.length) c.appendChild(el('p', 'muted', when.join('; ')));
+    if (open && q.line_for_dinis) { c.appendChild(el('p', 'muted', 'Paste this line:')); c.appendChild(paste(q.line_for_dinis)); }
+    else if (q.line_for_dinis) c.appendChild(el('p', 'muted', 'Line: ' + q.line_for_dinis));
+    if (q.session) { var s = el('p', 'muted'); s.appendChild(document.createTextNode('Where: ')); s.appendChild(link(q.session, q.session)); c.appendChild(s); }
+    return c;
+  }
+
+  function drawQuestions(d) {
+    var n = clear('questions');
+    if (!d) { n.appendChild(el('p', 'bad', 'The questions file did not load. See Sources.')); return; }
+    var list = Array.isArray(d) ? d : (d.questions || d.items || []);
+    var rank = { high: 0, medium: 1, low: 2 };
+    function r(q) { return rank[q.urgency] === undefined ? 3 : rank[q.urgency]; }
+    function isClosed(q) { return !!q.closed || /^(answered|closed|done|dropped)/i.test(q.status || ''); }
+    var open = list.filter(function (q) { return !isClosed(q); }).sort(function (a, b) { return r(a) - r(b); });
+    var done = list.filter(isClosed).sort(function (a, b) { return String(b.closed || '').localeCompare(String(a.closed || '')); });
+    open.forEach(function (q) { n.appendChild(qCard(q, true)); });
+    if (!open.length) n.appendChild(el('p', '', 'No open questions.'));
+    if (done.length) {
+      var det = el('details'); det.appendChild(el('summary', '', 'Answered (' + done.length + ')'));
+      done.forEach(function (q) { det.appendChild(qCard(q, false)); });
+      n.appendChild(det);
+    }
+  }
+
   function drawFlags(a) {
     var n = clear('flags');
     if (!a) { n.appendChild(el('p', 'bad', 'The agents view did not load.')); return; }
@@ -181,7 +219,7 @@
     document.getElementById('loaded').textContent = 'Loading...';
     get(SPINE, 'Briefing (maestro)').then(function (b) {
       if (!b) {
-        ['wait', 'review', 'projects'].forEach(function (id) { var n = clear(id); n.appendChild(el('p', 'bad', 'The briefing did not load, so this is empty. See Sources.')); });
+        ['wait', 'review', 'projects', 'questions'].forEach(function (id) { var n = clear(id); n.appendChild(el('p', 'bad', 'The briefing did not load, so this is empty. See Sources.')); });
         clear('decisions'); clear('costs'); clear('flags'); drawSources();
         document.getElementById('loaded').textContent = 'Failed at ' + new Date().toISOString();
         return;
@@ -193,6 +231,7 @@
       return Promise.all([
         drawReview(b.to_review),
         src.agents_view ? get(src.agents_view, 'Agents view (observability)').then(drawFlags) : null,
+        get(src.questions || QUESTIONS, 'Questions (decisions)').then(drawQuestions),
         src.sessions ? get(src.sessions, 'Sessions (maestro)') : null,
         src.cost_events ? get(src.cost_events, 'Cost events (maestro)').then(drawCosts) : null
       ]).then(function () {
