@@ -114,37 +114,54 @@
   }
 
 
+  // Both field sets are read: decisions' (question, line_to_paste, context_url, since, answer_url) and the earlier (title, line_for_dinis, session, opened, closed).
+  function qNorm(q) {
+    var ctx = q.context_url || q.session || '';
+    if (/^session_[A-Za-z0-9]+$/.test(ctx)) ctx = 'https://claude.ai/code/' + ctx;
+    var u = String(q.urgency || '').toLowerCase();
+    var level = /^(now|high|urgent)/.test(u) ? 'high' : /^(next|medium|soon)/.test(u) ? 'medium' : /^low/.test(u) ? 'low' : '';
+    var status = String(q.status || '').toLowerCase();
+    return {
+      title: q.question || q.title || q.id || 'Question',
+      line: q.line_to_paste || q.line_for_dinis || '',
+      where: ctx, answer: q.answer_url || '',
+      opened: q.since || q.opened || '', closed: q.closed || '',
+      by: q.asked_by || '', urgency: q.urgency || '', level: level, status: status,
+      done: !!q.closed || /^(answered|withdrawn|closed|done|dropped)/.test(status)
+    };
+  }
+
   function qCard(q, open) {
-    var rank = { high: 'high', medium: 'medium', low: 'low' };
-    var c = el('div', 'card ' + (open && rank[q.urgency] ? q.urgency : ''));
+    var c = el('div', 'card ' + (open ? q.level : ''));
     var p = el('p');
-    p.appendChild(el('span', 'tag', open ? (q.urgency || 'n/a') : 'answered'));
-    p.appendChild(document.createTextNode(q.title || q.id || 'Question'));
+    p.appendChild(el('span', 'tag', open ? (q.urgency || 'n/a') : (q.status || 'answered')));
+    p.appendChild(document.createTextNode(q.title));
     c.appendChild(p);
     var when = [];
+    if (q.by) when.push('asked by ' + q.by);
     if (q.opened) when.push('opened ' + q.opened);
     if (q.closed) when.push('closed ' + q.closed);
     if (q.status) when.push('status: ' + q.status);
     if (when.length) c.appendChild(el('p', 'muted', when.join('; ')));
-    if (open && q.line_for_dinis) { c.appendChild(el('p', 'muted', 'Paste this line:')); c.appendChild(paste(q.line_for_dinis)); }
-    else if (q.line_for_dinis) c.appendChild(el('p', 'muted', 'Line: ' + q.line_for_dinis));
-    if (q.session) { var s = el('p', 'muted'); s.appendChild(document.createTextNode('Where: ')); s.appendChild(link(q.session, q.session)); c.appendChild(s); }
+    if (open && q.line) { c.appendChild(el('p', 'muted', 'Paste this line:')); c.appendChild(paste(q.line)); }
+    else if (q.line) c.appendChild(el('p', 'muted', 'Line: ' + q.line));
+    if (q.where) { var s = el('p', 'muted'); s.appendChild(document.createTextNode('Where: ')); s.appendChild(link(q.where, q.where)); c.appendChild(s); }
+    if (q.answer) { var t = el('p', 'muted'); t.appendChild(document.createTextNode('Answer: ')); t.appendChild(link(q.answer, q.answer)); c.appendChild(t); }
     return c;
   }
 
   function drawQuestions(d) {
     var n = clear('questions');
     if (!d) { n.appendChild(el('p', 'bad', 'The questions file did not load. See Sources.')); return; }
-    var list = Array.isArray(d) ? d : (d.questions || d.items || []);
+    var list = (Array.isArray(d) ? d : (d.questions || d.items || [])).map(qNorm);
     var rank = { high: 0, medium: 1, low: 2 };
-    function r(q) { return rank[q.urgency] === undefined ? 3 : rank[q.urgency]; }
-    function isClosed(q) { return !!q.closed || /^(answered|closed|done|dropped)/i.test(q.status || ''); }
-    var open = list.filter(function (q) { return !isClosed(q); }).sort(function (a, b) { return r(a) - r(b); });
-    var done = list.filter(isClosed).sort(function (a, b) { return String(b.closed || '').localeCompare(String(a.closed || '')); });
+    function r(q) { return rank[q.level] === undefined ? 3 : rank[q.level]; }
+    var open = list.filter(function (q) { return !q.done; }).sort(function (a, b) { return r(a) - r(b); });
+    var done = list.filter(function (q) { return q.done; }).sort(function (a, b) { return String(b.closed || b.opened).localeCompare(String(a.closed || a.opened)); });
     open.forEach(function (q) { n.appendChild(qCard(q, true)); });
     if (!open.length) n.appendChild(el('p', '', 'No open questions.'));
     if (done.length) {
-      var det = el('details'); det.appendChild(el('summary', '', 'Answered (' + done.length + ')'));
+      var det = el('details'); det.appendChild(el('summary', '', 'Answered or withdrawn (' + done.length + ')'));
       done.forEach(function (q) { det.appendChild(qCard(q, false)); });
       n.appendChild(det);
     }
