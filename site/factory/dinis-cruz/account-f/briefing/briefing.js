@@ -34,7 +34,7 @@
     });
   }
 
-  function paste(line) {
+  function paste(line, id) {
     var box = el('div', 'paste');
     box.appendChild(el('code', '', line));
     var b = el('button', '', 'Copy');
@@ -45,6 +45,11 @@
       else done(false);
     });
     box.appendChild(b);
+    if (id) {
+      var t = el('button', 'tick', 'pasted?'); t.type = 'button';
+      t.addEventListener('click', function () { if (markPasted(id)) load(); else t.textContent = 'cannot save here'; });
+      box.appendChild(t);
+    }
     return box;
   }
 
@@ -98,69 +103,114 @@
   }
 
 
-  // One list from briefing.json waiting_on_dinis[] and decisions' questions.json. Both field sets are read:
-  // (question, line_to_paste, context_url, since, asked_by, answer_url) and (what, line, where, id, urgency).
-  function norm(q, from) {
+  // One merged list (design: cells/2026-11-27-briefing-page-layout.md, Site__Agent__Design 42727bc). Key by id; questions.json wins and
+  // briefing.json fills gaps; the same line to paste is the same row. Groups: Now, Today, Later (collapsed), Done (collapsed).
+  var PASTED = 'briefing-pasted-ids';
+  function pastedSet() { try { return JSON.parse(localStorage.getItem(PASTED) || '[]'); } catch (e) { return []; } }
+  function markPasted(id) { try { var s = pastedSet(); if (s.indexOf(id) < 0) s.push(id); localStorage.setItem(PASTED, JSON.stringify(s)); return true; } catch (e) { return false; } }
+
+  function norm(q) {
     var ctx = q.context_url || q.session || q.where || '';
     if (/^session_[A-Za-z0-9]+$/.test(ctx)) ctx = 'https://claude.ai/code/' + ctx;
-    var u = String(q.urgency || '');
-    var lu = u.toLowerCase();
-    var rank = /^(now|urgent)/.test(lu) ? 0 : /^high/.test(lu) ? 1 : /^(next|medium|soon)/.test(lu) ? 2 : /^low/.test(lu) ? 3 : 4;
+    var u = String(q.urgency || '').trim();
+    var first = (u.toLowerCase().match(/^[a-z]+/) || [''])[0];
+    var group = first === 'now' ? 'now' : (first === 'today' || first === 'high') ? 'today' : 'later';
+    var deadline = u.replace(/^[A-Za-z]+\s*[:,;-]?\s*/, '').trim();
     var status = String(q.status || '').toLowerCase();
-    // A deadline is any urgency text that says more than the bare level word.
-    var extra = u.replace(/^\s*(now|urgent|high|next|medium|soon|low)\s*[:,;-]?\s*/i, '').trim();
     return {
       id: q.id || '', title: q.question || q.title || q.what || q.id || 'Question',
       line: q.line_to_paste || q.line_for_dinis || q.line || '',
       where: ctx, answer: q.answer_url || '', opened: q.since || q.opened || '', closed: q.closed || '',
-      by: q.asked_by || '', level: u, rank: rank, deadline: extra, status: status, from: from,
-      done: !!q.closed || /^(answered|withdrawn|closed|done|dropped)/.test(status)
+      by: q.asked_by || '', chip: first || 'later', group: group, deadline: deadline,
+      done: !!q.closed || /^(answered|withdrawn|closed|done|dropped)/.test(status), status: status
     };
   }
 
-  function row(q, open) {
-    var c = el('div', 'row' + (open ? ' r' + q.rank : ' done'));
+  function passed(deadline) {
+    var m = /(\d{1,2}):(\d{2})\s*UTC/i.exec(deadline || '');
+    if (!m) return false;
+    var now = new Date();
+    return (+m[1]) * 60 + (+m[2]) < now.getUTCHours() * 60 + now.getUTCMinutes();
+  }
+
+  function row(q, group) {
+    var c = el('div', 'row g-' + group + (group === 'done' ? ' done' : ''));
     var top = el('div', 'rtop');
-    var lvl = open ? (q.rank === 0 ? 'NOW' : q.rank === 1 ? 'HIGH' : q.rank === 2 ? 'NEXT' : q.rank === 3 ? 'LOW' : (q.level || '').toUpperCase()) : (q.status || 'answered');
-    top.appendChild(el('span', 'tag', lvl));
-    top.appendChild(el('strong', 'rtitle', q.title));
+    top.appendChild(el('span', 'tag t-' + group, group === 'done' ? (q.status === 'withdrawn' ? 'Withdrawn' : 'Done') : group === 'now' ? 'Now' : group === 'today' ? 'Today' : 'Later'));
+    if (q.deadline && group !== 'done') top.appendChild(el('span', 'deadline', (passed(q.deadline) ? 'passed: ' : '') + q.deadline));
     c.appendChild(top);
-    if (open && q.deadline) c.appendChild(el('p', 'deadline', 'Deadline: ' + q.deadline));
-    if (q.line) { c.appendChild(paste(q.line)); }
-    var meta = el('p', 'muted');
+    var t = el('p', 'rtitle' + (group === 'done' ? ' struck' : ''), q.title);
+    t.classList.add('clamp');
+    c.appendChild(t);
+    if (q.title.length > 110) {
+      var more = el('button', 'linkbtn', 'more'); more.type = 'button';
+      more.addEventListener('click', function () { var on = t.classList.toggle('clamp'); more.textContent = on ? 'more' : 'less'; });
+      c.appendChild(more);
+    }
+    if (group !== 'done') {
+      if (q.line) c.appendChild(paste(q.line, q.id));
+      else c.appendChild(el('div', 'noline', 'No line to paste: open the session'));
+      if (q.where) {
+        var pi = el('p', 'pastein'); pi.appendChild(document.createTextNode('Paste in: '));
+        var a = link(q.where, 'Open session'); a.className = 'btn'; pi.appendChild(a); c.appendChild(pi);
+      }
+    } else if (q.answer) { var an = el('p', 'meta'); an.appendChild(link(q.answer, 'Answer')); c.appendChild(an); }
     var bits = [];
     if (q.by) bits.push('asked by ' + q.by);
     if (q.opened) bits.push('since ' + q.opened);
     if (q.closed) bits.push('closed ' + q.closed);
-    meta.appendChild(document.createTextNode(bits.join(' · ')));
-    if (q.where) { if (bits.length) meta.appendChild(document.createTextNode(' · ')); meta.appendChild(link(q.where, 'open the session')); }
-    if (q.answer) { meta.appendChild(document.createTextNode(' · ')); meta.appendChild(link(q.answer, 'answer')); }
-    if (meta.firstChild) c.appendChild(meta);
+    if (q.id) bits.push(q.id);
+    if (bits.length) c.appendChild(el('p', 'meta', bits.join(' · ')));
     return c;
   }
 
-  function drawNeeds(waiting, qdata, qfailed) {
+  function group(n, key, title, items, collapsed) {
+    var box = el(collapsed ? 'details' : 'div', 'grp');
+    if (collapsed && key === 'later' && items.length) box.open = false;
+    var head = el(collapsed ? 'summary' : 'h2', 'ghead', title + ' (' + items.length + ')');
+    if (collapsed && items.length) head.appendChild(el('span', 'peek', ' ' + items.slice(0, 2).map(function (q) { return q.title.slice(0, 60); }).join(' · ')));
+    box.appendChild(head);
+    items.forEach(function (q) { box.appendChild(row(q, key)); });
+    if (!items.length && !collapsed) box.appendChild(el('p', '', key === 'now' ? 'Nothing needs you now.' : 'Nothing today.'));
+    if (items.length || !collapsed) n.appendChild(box);
+  }
+
+  function drawNeeds(waiting, qdata, qfailed, bfailed) {
     var n = clear('needs');
     var qs = qdata ? (Array.isArray(qdata) ? qdata : (qdata.questions || qdata.items || [])) : [];
-    var all = (waiting || []).map(function (w) { return norm(w, 'briefing'); }).concat(qs.map(function (q) { return norm(q, 'questions'); }));
-    // No duplicates: the same id, or the same line to paste, shows once (the questions file wins, it has more fields).
-    var seen = {}, list = [];
-    all.slice().sort(function (a, b) { return (a.from === 'questions' ? 0 : 1) - (b.from === 'questions' ? 0 : 1); }).forEach(function (q) {
-      var k1 = q.id && 'i:' + q.id, k2 = q.line && 'l:' + q.line;
-      if ((k1 && seen[k1]) || (k2 && seen[k2])) return;
-      if (k1) seen[k1] = 1; if (k2) seen[k2] = 1;
-      list.push(q);
-    });
-    if (qfailed) n.appendChild(el('p', 'bad', 'The questions file did not load, so only the briefing items are shown.'));
-    var open = list.filter(function (q) { return !q.done; }).sort(function (a, b) { return a.rank - b.rank; });
-    var done = list.filter(function (q) { return q.done; });
-    open.forEach(function (q) { n.appendChild(row(q, true)); });
-    if (!open.length) n.appendChild(el('p', '', 'Nothing is waiting on Dinis.'));
-    if (done.length) {
-      var det = el('details'); det.appendChild(el('summary', '', 'Answered or withdrawn (' + done.length + ')'));
-      done.forEach(function (q) { det.appendChild(row(q, false)); });
-      n.appendChild(det);
+    var map = {}, order = [], lines = {};
+    function add(q, wins) {
+      var r = norm(q);
+      var key = r.id ? 'i:' + r.id : (r.line ? 'l:' + r.line : 'x' + order.length);
+      var lk = r.line && lines[r.line];
+      if (lk) key = lk;
+      if (map[key]) {
+        var cur = map[key];
+        if (wins) { Object.keys(r).forEach(function (f) { if (r[f] !== '' && r[f] !== false) cur[f] = r[f]; }); }
+        else Object.keys(r).forEach(function (f) { if (!cur[f] && r[f]) cur[f] = r[f]; });
+      } else { map[key] = r; order.push(key); }
+      if (r.line) lines[r.line] = key;
     }
+    qs.forEach(function (q) { add(q, true); });
+    (waiting || []).forEach(function (w) { add(w, false); });
+    var list = order.map(function (k) { return map[k]; });
+    var mine = pastedSet();
+    list.forEach(function (q) { if (q.id && mine.indexOf(q.id) >= 0) { q.done = true; q.status = q.status || 'pasted'; } });
+    if (qfailed && bfailed) { n.appendChild(el('p', 'bad', 'The briefing did not load.')); return; }
+    if (qfailed) n.appendChild(el('p', 'bad', 'questions.json did not load; showing briefing.json only.'));
+    if (bfailed && !qfailed) n.appendChild(el('p', 'bad', 'briefing.json did not load; showing questions.json only.'));
+    var open = list.filter(function (q) { return !q.done; });
+    function by(a, b) { return (b.deadline ? 1 : 0) - (a.deadline ? 1 : 0) || String(a.opened).localeCompare(String(b.opened)); }
+    var g = { now: [], today: [], later: [] };
+    open.forEach(function (q) { g[q.group].push(q); });
+    Object.keys(g).forEach(function (k) { g[k].sort(by); });
+    var done = list.filter(function (q) { return q.done; });
+    document.getElementById('counts').textContent = g.now.length + ' now, ' + g.today.length + ' today, ' + g.later.length + ' later';
+    group(n, 'now', 'Now', g.now, false);
+    group(n, 'today', 'Today', g.today, false);
+    group(n, 'later', 'Later', g.later, true);
+    group(n, 'done', 'Done', done, true);
+    n.appendChild(el('p', 'meta', 'The "pasted?" tick moves a row to Done on this device only (kept in this browser, not shared).'));
   }
 
   function drawFlags(a) {
@@ -230,9 +280,11 @@
   function load() {
     status = [];
     document.getElementById('loaded').textContent = 'Loading...';
+    var ln = clear('needs'); ln.appendChild(el('div', 'row skeleton', 'Loading the briefing')); 
     get(SPINE, 'Briefing (maestro)').then(function (b) {
       if (!b) {
-        ['needs', 'review', 'projects'].forEach(function (id) { var n = clear(id); n.appendChild(el('p', 'bad', 'The briefing did not load, so this is empty. See Sources.')); });
+        ['review', 'projects'].forEach(function (id) { var n = clear(id); n.appendChild(el('p', 'bad', 'The briefing did not load, so this is empty. See Sources.')); });
+        get(QUESTIONS, 'Questions (decisions)').then(function (q) { drawNeeds([], q, !q, true); drawSources(); });
         clear('decisions'); clear('costs'); clear('flags'); drawSources();
         document.getElementById('loaded').textContent = 'Failed at ' + new Date().toISOString();
         return;
@@ -240,7 +292,7 @@
       var src = b.sources || {};
       drawProjects(b.projects);
       drawDecisions(b.decisions);
-      var qp = get(src.questions || QUESTIONS, 'Questions (decisions)').then(function (q) { drawNeeds(b.waiting_on_dinis, q, !q); });
+      var qp = get(src.questions || QUESTIONS, 'Questions (decisions)').then(function (q) { drawNeeds(b.waiting_on_dinis, q, !q, false); });
       return Promise.all([
         qp,
         drawReview(b.to_review),
