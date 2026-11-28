@@ -281,6 +281,60 @@ out = dict(agent="cl-6.observability@dinis", as_of=AS_OF, window_tokens=WINDOW,
            archived=[dict(name=a, id=i, wake_note=w) for a, i, w in ARCHIVED])
 json.dump(out, open(os.path.join(HERE, "agents.json"), "w"), indent=1); open(os.path.join(HERE, "agents.json"), "a").write("\n")
 
+# ---------- PrompTugal agents feed (cell 2026-11-28-promptugal-status, cl-6.dev builds the admin page from it) ----------
+import re as _re
+DESK = {"conductor":"Leadership","researcher":"Newsroom","curator":"Newsroom","journalist":"Newsroom","correspondent":"Newsroom","checker":"Newsroom","reviewer":"Newsroom","translator":"Newsroom","programme":"Newsroom",
+ "data":"Sections","weather":"Sections","civic":"Sections","startups":"Sections","travel":"Sections","bulletins":"Sections","videos":"Sections","live":"Sections","events":"Sections","cyber":"Sections","signals":"Sections","library":"Sections","places":"Sections","place.london":"Sections","data.london":"Sections",
+ "dev":"Platform","devops":"Platform","infra":"Platform","security":"Platform","abp":"Platform","observability":"Platform","telemetry":"Platform","backup":"Platform","historian":"Platform","ontologist":"Platform","synthetic":"Platform","sherpa":"Platform","rights":"Platform","designer":"Platform",
+ "investors":"Business","customers":"Business","outreach":"Business","accountant":"Business","analyst":"Business"}
+ROLE = {"conductor":"Runs the PrompTugal team","researcher":"Public research for the newsroom","curator":"Picks stories and categories","journalist":"Writes and publishes articles","correspondent":"Keeps the front page current","checker":"Checks every fact against its source","reviewer":"Reviews what was published","translator":"pt-PT translations","programme":"Events and agenda","data":"Collects the public data feeds","weather":"Weather site","civic":"Civic site","startups":"Startups site","travel":"Travel site","bulletins":"Bulletins site","videos":"Videos site","live":"Live site","events":"Events site","cyber":"Cyber site","signals":"Signals site","library":"Library site","places":"Local news for the Algarve places","place.london":"London local signals and news","data.london":"London data (strikes, TfL status)",
+ "dev":"Builds and releases the website","devops":"CI, releases and deploys","infra":"Infrastructure and IaC","security":"Reviews every push; holds the gate","abp":"Agent behaviour policy and grants","observability":"Traffic counts (drain)","telemetry":"Counts cost and tool use per agent","backup":"Backups","historian":"Records the history","ontologist":"Data schemas and the knowledge graph","synthetic":"Synthetic reader checks","sherpa":"Reader and newcomer journeys","rights":"Licences, terms and attribution","designer":"Design of the PrompTugal sites",
+ "investors":"PrompTugal as an investable business","customers":"Briefs on readers and customers","outreach":"Outreach","accountant":"Costs","analyst":"Analysis"}
+HOME = {"places":"PrompTugal/PrompTugal__Agent__Place__Algarve","place.london":"PrompTugal/PrompTugal__Agent__Place__London","data.london":"PrompTugal/PrompTugal__Agent__Data","devops":"PrompTugal/PrompTugal__Agent__DevOps","infra":"PrompTugal/PrompTugal__Agent__Infrastructure","abp":"PrompTugal/PrompTugal__Agent__ABP"}
+LAST_WHAT = {"journalist":"Tube fix recorded in now.md (7d4641c); nothing published","abp":"Wake run report filed (c37519e): 29 tool calls, 0 breaches","analyst":"R10 run report and agent.json pushed (0fcc47c); no breaches",
+ "reviewer":"Nothing new to review; run report and signed agent.json filed (08f4148)","customers":"Signed commit 1e8cc8c: agent.json and run report; no breaches","investors":"R10 run report pushed (692400e); open items left for Dinis via the conductor",
+ "backup":"Run report and signed commit 7d1fc60; no backup run, no destination granted","researcher":"Algarve events re-checked; findings filed (1fc75af)","historian":"History addendum 3 filed (587aca7)","translator":"Wake found nothing new; back-catalogue question filed in now.md",
+ "ontologist":"No new articles; run report pushed","library":"Pushed key/cl-6.library (3c0ebed); key PR waits on IaC and Dinis","data":"Data feed status page made (private snapshot)","data.london":"06:24 wake: log and status notes pushed (fcf9ada); TfL still returns 403","place.london":"Pushed now.md, agent.json and run report (b676fd9); waits on TfL route, pin change, security review, grant"}
+def _next_wake(w):
+    m = _re.match(r"(?:CRON_TZ=\S+\s+)?(\d+) ([\d,]+) \* \* \*", w.replace("(","").split(" (")[0] if False else w)
+    return None
+def _nw(w):
+    m = _re.search(r"(\d+) ([\d,]+) \* \* \*", w or "")
+    if not m: return None
+    import datetime as _dt
+    now = _dt.datetime.utcnow()
+    best = None
+    for h in m.group(2).split(","):
+        for dd in (0, 1):
+            t = (now + _dt.timedelta(days=dd)).replace(hour=int(h), minute=int(m.group(1)), second=0, microsecond=0)
+            if t > now and (best is None or t < best): best = t
+    return best.strftime("%Y-%m-%dT%H:%MZ") if best else None   # Europe/Lisbon equals UTC in November
+def _date_of(n, upd):
+    if n in TIME3 or n in TIME2: return "2026-11-27"
+    if n in TIME: return "2026-11-26"
+    return "2025-11-25" if str(upd).startswith("25 Nov") else "2026-11-26"
+agents_feed = []
+for r in rows:
+    if not r["name"].endswith("@PrompTugal"): continue
+    key = r["name"].split("@")[0].replace("cl-6.", "")
+    upd = r["last_activity"]; ts = None
+    mm = _re.match(r"(\d\d):(\d\d)$", str(upd))
+    if mm: ts = _date_of(r["name"], upd) + "T" + upd + "Z"
+    agents_feed.append(dict(id=r["name"], desk=DESK.get(key, "Other"), role=ROLE.get(key, ""),
+        home_repo=HOME.get(key, "PrompTugal/PrompTugal__Agent__" + "".join(w.capitalize() for w in key.split("."))),
+        status=r["status"].lower(), last_activity=dict(at=ts, what=LAST_WHAT.get(key)),
+        next_step=dict(next_wake=_nw(r["wake"]), wake=r["wake"]),
+        blocked_on=r["needs_action"] or None, context_pct=r["context_pct"], context_read=r["context_read"], model=r["model"]))
+feed = dict(about="Every agent that works on PrompTugal, grouped by desk. Built by cl-6.observability@dinis from session records and wake lists only (never transcripts).",
+    as_of=AS_OF, source="agents.json (this folder)",
+    notes=["desk is my grouping by role (Leadership, Newsroom, Sections, Platform, Business), not an official one; the conductor may change it.",
+           "last_activity.at is the session's last update; last_activity.what is the session's own summary where I read one, else null.",
+           "next_step is the next scheduled wake (UTC; Europe/Lisbon equals UTC in November); a session with no wake has next_wake null.",
+           "context_pct is the share of the 1,000,000-token window used at context_read; rows not re-read since an earlier wake are older.",
+           "Archived sessions are not listed."],
+    desks=sorted({a["desk"] for a in agents_feed}), count=len(agents_feed), agents=agents_feed)
+json.dump(feed, open(os.path.join(HERE, "promptugal-agents.json"), "w"), indent=1); open(os.path.join(HERE, "promptugal-agents.json"), "a").write("\n")
+
 # ---------- page ----------
 e = html.escape
 def li(items): return "".join(f"<li>{e(x)}</li>" for x in items) or "<li>None.</li>"

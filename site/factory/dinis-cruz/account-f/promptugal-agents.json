@@ -1,0 +1,839 @@
+{
+ "about": "Every agent that works on PrompTugal, grouped by desk. Built by cl-6.observability@dinis from session records and wake lists only (never transcripts).",
+ "as_of": "2026-11-28T00:58Z",
+ "source": "agents.json (this folder)",
+ "notes": [
+  "desk is my grouping by role (Leadership, Newsroom, Sections, Platform, Business), not an official one; the conductor may change it.",
+  "last_activity.at is the session's last update; last_activity.what is the session's own summary where I read one, else null.",
+  "next_step is the next scheduled wake (UTC; Europe/Lisbon equals UTC in November); a session with no wake has next_wake null.",
+  "context_pct is the share of the 1,000,000-token window used at context_read; rows not re-read since an earlier wake are older.",
+  "Archived sessions are not listed."
+ ],
+ "desks": [
+  "Business",
+  "Leadership",
+  "Newsroom",
+  "Platform",
+  "Sections"
+ ],
+ "count": 43,
+ "agents": [
+  {
+   "id": "cl-6.conductor@PrompTugal",
+   "desk": "Leadership",
+   "role": "Runs the PrompTugal team",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Conductor",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T21:17Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none found"
+   },
+   "blocked_on": "Journalist website access first; then 7 more items, starting with the strikes-site go-ahead",
+   "context_pct": 45.3,
+   "context_read": "22:25 (27 Nov)",
+   "model": "opus"
+  },
+  {
+   "id": "cl-6.place.london@PrompTugal",
+   "desk": "Sections",
+   "role": "London local signals and news",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Place__London",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T18:26Z",
+    "what": "Pushed now.md, agent.json and run report (b676fd9); waits on TfL route, pin change, security review, grant"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:25Z",
+    "wake": "25 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 11.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.data.london@PrompTugal",
+   "desk": "Sections",
+   "role": "London data (strikes, TfL status)",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Data",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T17:23Z",
+    "what": "06:24 wake: log and status notes pushed (fcf9ada); TfL still returns 403"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T06:23Z",
+    "wake": "23 6,17 * * * (UTC)"
+   },
+   "blocked_on": null,
+   "context_pct": 11.0,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.infra@PrompTugal",
+   "desk": "Platform",
+   "role": "Infrastructure and IaC",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Infrastructure",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T17:58Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none found"
+   },
+   "blocked_on": "Merges, the App's permissions, verify promptugal.news",
+   "context_pct": 35.0,
+   "context_read": "16:50",
+   "model": "opus"
+  },
+  {
+   "id": "cl-6.analyst@PrompTugal",
+   "desk": "Business",
+   "role": "Analysis",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Analyst",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T18:54Z",
+    "what": "R10 run report and agent.json pushed (0fcc47c); no breaches"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:53Z",
+    "wake": "53 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 21.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.programme@PrompTugal",
+   "desk": "Newsroom",
+   "role": "Events and agenda",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Programme",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T18:44Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:43Z",
+    "wake": "43 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "Decide the agenda; history/** in the ABP grant",
+   "context_pct": 19.1,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.checker@PrompTugal",
+   "desk": "Newsroom",
+   "role": "Checks every fact against its source",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Checker",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T19:14Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:13Z",
+    "wake": "13 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 36.9,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.curator@PrompTugal",
+   "desk": "Newsroom",
+   "role": "Picks stories and categories",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Curator",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T20:33Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:47Z",
+    "wake": "47 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "Attach the website with push to the journalist's session",
+   "context_pct": 22.5,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.reviewer@PrompTugal",
+   "desk": "Newsroom",
+   "role": "Reviews what was published",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Reviewer",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T19:03Z",
+    "what": "Nothing new to review; run report and signed agent.json filed (08f4148)"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:03Z",
+    "wake": "3 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 65.1,
+   "context_read": "22:25 (27 Nov)",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.customers@PrompTugal",
+   "desk": "Business",
+   "role": "Briefs on readers and customers",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Customers",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T19:44Z",
+    "what": "Signed commit 1e8cc8c: agent.json and run report; no breaches"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:43Z",
+    "wake": "43 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "Add its key to board/keys.json; decide P5 and P11",
+   "context_pct": 16.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.investors@PrompTugal",
+   "desk": "Business",
+   "role": "PrompTugal as an investable business",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Investors",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T20:34Z",
+    "what": "R10 run report pushed (692400e); open items left for Dinis via the conductor"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T09:33Z",
+    "wake": "33 9,20 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 17.7,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.backup@PrompTugal",
+   "desk": "Platform",
+   "role": "Backups",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Backup",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T21:04Z",
+    "what": "Run report and signed commit 7d1fc60; no backup run, no destination granted"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T10:03Z",
+    "wake": "3 10,21 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 28.2,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.outreach@PrompTugal",
+   "desk": "Business",
+   "role": "Outreach",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Outreach",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:38Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: the website is attached"
+   },
+   "blocked_on": "Whether to allow attaching the website",
+   "context_pct": 11.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.researcher@PrompTugal",
+   "desk": "Newsroom",
+   "role": "Public research for the newsroom",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Researcher",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:38Z",
+    "what": "Algarve events re-checked; findings filed (1fc75af)"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:33Z",
+    "wake": "33 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 28.1,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.historian@PrompTugal",
+   "desk": "Platform",
+   "role": "Records the history",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Historian",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T20:24Z",
+    "what": "History addendum 3 filed (587aca7)"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T09:23Z",
+    "wake": "23 9,20 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "history/** path in its grant; clones outside it; the hook kit",
+   "context_pct": 20.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.telemetry@PrompTugal",
+   "desk": "Platform",
+   "role": "Counts cost and tool use per agent",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Telemetry",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T21:18Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T10:13Z",
+    "wake": "13 10,21 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 28.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.translator@PrompTugal",
+   "desk": "Newsroom",
+   "role": "pt-PT translations",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Translator",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T20:05Z",
+    "what": "Wake found nothing new; back-catalogue question filed in now.md"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T09:03Z",
+    "wake": "3 9,20 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 69.1,
+   "context_read": "22:25 (27 Nov)",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.rights@PrompTugal",
+   "desk": "Platform",
+   "role": "Licences, terms and attribution",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Rights",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T19:55Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:53Z",
+    "wake": "53 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 36.7,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.synthetic@PrompTugal",
+   "desk": "Platform",
+   "role": "Synthetic reader checks",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Synthetic",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T20:15Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T09:13Z",
+    "wake": "13 9,20 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 20.9,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.sherpa@PrompTugal",
+   "desk": "Platform",
+   "role": "Reader and newcomer journeys",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Sherpa",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T20:34Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T09:27Z",
+    "wake": "27 9,20 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 23.9,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.observability@PrompTugal",
+   "desk": "Platform",
+   "role": "Traffic counts (drain)",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Observability",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:37Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none found (drain waits for a wake)"
+   },
+   "blocked_on": null,
+   "context_pct": 31.4,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.ontologist@PrompTugal",
+   "desk": "Platform",
+   "role": "Data schemas and the knowledge graph",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Ontologist",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T19:36Z",
+    "what": "No new articles; run report pushed"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:33Z",
+    "wake": "33 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 64.8,
+   "context_read": "22:25 (27 Nov)",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.accountant@PrompTugal",
+   "desk": "Business",
+   "role": "Costs",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Accountant",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T21:18Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: the website is attached"
+   },
+   "blocked_on": "Dinis: a cap or ceiling level; where the ledger now lives",
+   "context_pct": 17.4,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.designer@PrompTugal",
+   "desk": "Platform",
+   "role": "Design of the PrompTugal sites",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Designer",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T20:34Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:23Z",
+    "wake": "23 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 32.8,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.places@PrompTugal",
+   "desk": "Sections",
+   "role": "Local news for the Algarve places",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Place__Algarve",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:49Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:23Z",
+    "wake": "23 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "Dinis on grant P11 c (cl-6.abp has not applied it)",
+   "context_pct": 39.3,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.correspondent@PrompTugal",
+   "desk": "Newsroom",
+   "role": "Keeps the front page current",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Correspondent",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T20:11Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:57Z",
+    "wake": "57 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 27.4,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.security@PrompTugal",
+   "desk": "Platform",
+   "role": "Reviews every push; holds the gate",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Security",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T21:15Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T09:47Z",
+    "wake": "47 9,20 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 33.1,
+   "context_read": "16:50",
+   "model": "opus"
+  },
+  {
+   "id": "cl-6.dev@PrompTugal",
+   "desk": "Platform",
+   "role": "Builds and releases the website",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Dev",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T21:15Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:37Z",
+    "wake": "37 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 14.9,
+   "context_read": "22:25",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.bulletins@PrompTugal",
+   "desk": "Sections",
+   "role": "Bulletins site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Bulletins",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:37Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: key route"
+   },
+   "blocked_on": null,
+   "context_pct": 23.9,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.videos@PrompTugal",
+   "desk": "Sections",
+   "role": "Videos site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Videos",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:37Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: key route"
+   },
+   "blocked_on": "Whether to push its key branch and open the key PR",
+   "context_pct": 25.0,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.live@PrompTugal",
+   "desk": "Sections",
+   "role": "Live site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Live",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:36Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: key route"
+   },
+   "blocked_on": "The pages.yml anchor decision",
+   "context_pct": 34.4,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.events@PrompTugal",
+   "desk": "Sections",
+   "role": "Events site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Events",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:36Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: key route"
+   },
+   "blocked_on": "Merge IaC #25; a word to open the key PR",
+   "context_pct": 24.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.cyber@PrompTugal",
+   "desk": "Sections",
+   "role": "Cyber site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Cyber",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:39Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: key route"
+   },
+   "blocked_on": null,
+   "context_pct": 39.5,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.signals@PrompTugal",
+   "desk": "Sections",
+   "role": "Signals site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Signals",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:37Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: key route"
+   },
+   "blocked_on": null,
+   "context_pct": 24.2,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.library@PrompTugal",
+   "desk": "Sections",
+   "role": "Library site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Library",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T07:26Z",
+    "what": "Pushed key/cl-6.library (3c0ebed); key PR waits on IaC and Dinis"
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: the section key route lands (IaC PR 25)"
+   },
+   "blocked_on": null,
+   "context_pct": 63.2,
+   "context_read": "11:25 (27 Nov)",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.startups@PrompTugal",
+   "desk": "Sections",
+   "role": "Startups site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Startups",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:40Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:13Z",
+    "wake": "13 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 27.9,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.civic@PrompTugal",
+   "desk": "Sections",
+   "role": "Civic site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Civic",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:36Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:27Z",
+    "wake": "27 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "history/** and board/team/civic/** in its grant; its key in keys.json",
+   "context_pct": 30.6,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.travel@PrompTugal",
+   "desk": "Sections",
+   "role": "Travel site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Travel",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:36Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": null,
+    "wake": "none yet; planned, waits on: its gate change lands"
+   },
+   "blocked_on": "history/** and review/** write access",
+   "context_pct": 22.3,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.weather@PrompTugal",
+   "desk": "Sections",
+   "role": "Weather site",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Weather",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-26T18:36Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:17Z",
+    "wake": "17 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 30.3,
+   "context_read": "16:50",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.data@PrompTugal",
+   "desk": "Sections",
+   "role": "Collects the public data feeds",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Data",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T10:55Z",
+    "what": "Data feed status page made (private snapshot)"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:03Z",
+    "wake": "3 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": null,
+   "context_pct": 33.1,
+   "context_read": "11:25 (27 Nov)",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.abp@PrompTugal",
+   "desk": "Platform",
+   "role": "Agent behaviour policy and grants",
+   "home_repo": "PrompTugal/PrompTugal__Agent__ABP",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T21:38Z",
+    "what": "Wake run report filed (c37519e): 29 tool calls, 0 breaches"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T10:37Z",
+    "wake": "37 10,21 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "Held items: pin/re-pin, P11 c, P5, P15 to P20, six records, key PRs, tagline, journalist attach",
+   "context_pct": 52.6,
+   "context_read": "22:25 (27 Nov)",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.devops@PrompTugal",
+   "desk": "Platform",
+   "role": "CI, releases and deploys",
+   "home_repo": "PrompTugal/PrompTugal__Agent__DevOps",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T19:08Z",
+    "what": null
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T08:07Z",
+    "wake": "7 8,19 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "Dinis's word to add_repo, so the website repo is added to this session",
+   "context_pct": 12.7,
+   "context_read": "22:25",
+   "model": "sonnet"
+  },
+  {
+   "id": "cl-6.journalist@PrompTugal",
+   "desk": "Newsroom",
+   "role": "Writes and publishes articles",
+   "home_repo": "PrompTugal/PrompTugal__Agent__Journalist",
+   "status": "idle",
+   "last_activity": {
+    "at": "2026-11-27T19:27Z",
+    "what": "Tube fix recorded in now.md (7d4641c); nothing published"
+   },
+   "next_step": {
+    "next_wake": "2026-11-28T07:57Z",
+    "wake": "57 7,18 * * * (Europe/Lisbon)"
+   },
+   "blocked_on": "Push access to newsroom/build/features/tube-chart.mjs, or have cl-6.dev change it",
+   "context_pct": 13.0,
+   "context_read": "22:25 (27 Nov)",
+   "model": "sonnet"
+  }
+ ]
+}

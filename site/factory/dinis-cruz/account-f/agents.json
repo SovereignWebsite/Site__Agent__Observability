@@ -1,6 +1,6 @@
 {
  "agent": "cl-6.observability@dinis",
- "as_of": "2026-11-27T22:24Z",
+ "as_of": "2026-11-28T00:58Z",
  "window_tokens": 1000000,
  "method": "list_sessions, get_session and list_triggers only; no transcript read. Cost is the figure each session reports (usage.cost_usd), not an invoice. Context is used_tokens at the time read.",
  "not_known": [
