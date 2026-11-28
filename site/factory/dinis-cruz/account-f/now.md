@@ -58,3 +58,6 @@ Wake 2026-11-27T22:24Z (27 Nov): refreshed from list_sessions and get_session (1
 - Largest reported cost: decisions 182.57, conductor@PrompTugal 178.63, security@PrompTugal 148.26 (last read 26 Nov).
 
 2026-11-28T00:58Z: cell 2026-11-28-promptugal-status (maestro's brief 8979953): published site/factory/dinis-cruz/account-f/promptugal-agents.json, the agents feed for PrompTugal's admin page: 43 agents by desk (Leadership, Newsroom, Sections, Platform, Business; my grouping), each with id, role, home repo, last activity (time, what where read), next wake, blocked on, context % and when it was read. Built by build_view.py from session records and wakes only. Raw URL: https://raw.githubusercontent.com/SovereignWebsite/Site__Agent__Observability/dev/site/factory/dinis-cruz/account-f/promptugal-agents.json
+
+## 28 Nov 11:23 wake
+Read 8 sessions (status only). New past 50%: maestro (65.4%), conductor@PrompTugal (59.6%, handover already written at 1c28a9c). translator at 73.7%, 4.7% of the window below autocompact (784k). abp 56.9%. Reviewer 68.8%, ontologist 68.6%. No wake points at an archived session in the 3 trigger pages read. Other rows keep their earlier read markers.

@@ -250,6 +250,27 @@ for t in R:
     _R.append(tuple(t))
 R=_R
 
+# ---- delta of the 28 Nov 11:23 wake ----
+GET4 = {
+ "cl-6.translator@PrompTugal":(737055,42.13,"IDLE",""),
+ "cl-6.reviewer@PrompTugal":(687553,34.67,"IDLE",""),
+ "cl-6.ontologist@PrompTugal":(685744,38.51,"IDLE",""),
+ "cl-6.abp@PrompTugal":(568888,34.30,"IDLE","Nine decisions: pin/re-pin, s17 key revocation and held-infra, P11 c and P5, P15 to P20, two sync-data-now lines, github-pt removal, tagline write, key PRs, signed-admin-answer design"),
+ "cl-6.conductor@PrompTugal":(596194,281.27,"IDLE",""),
+ "cl-6.maestro@dinis":(653734,112.91,"RUNNING",""),
+}
+TIME4 = {"cl-6.translator@PrompTugal":"09:11","cl-6.reviewer@PrompTugal":"08:04","cl-6.ontologist@PrompTugal":"08:36",
+ "cl-6.abp@PrompTugal":"10:37","cl-6.conductor@PrompTugal":"10:17","cl-6.maestro@dinis":"11:23",
+ "cl-6.conductor@SovereignWebsite":"09:48","cl-6.devops@PrompTugal":"08:08","cl-6.journalist@PrompTugal":"08:21",
+ "cl-6.design@dinis":"08:42","cl-6.studio@SovereignWebsite":"10:17","cl-6.onboarding@SovereignWebsite":"08:08","cl-6.librarian@dinis":"02:31"}
+_R=[]
+for t in R:
+    t=list(t); n=t[0]
+    if n in GET4: t[5],t[6],t[7],t[9]=GET4[n]; RD[n]="11:25 (28 Nov)"
+    if n in TIME4: t[8]=TIME4[n]
+    _R.append(tuple(t))
+R=_R
+
 rows = []
 for n, proj, model, env, repos, ctx, cost, st, upd, needs, wake in R:
     pct = ctx / WINDOW
@@ -310,6 +331,7 @@ def _nw(w):
             if t > now and (best is None or t < best): best = t
     return best.strftime("%Y-%m-%dT%H:%MZ") if best else None   # Europe/Lisbon equals UTC in November
 def _date_of(n, upd):
+    if n in TIME4: return "2026-11-28"
     if n in TIME3 or n in TIME2: return "2026-11-27"
     if n in TIME: return "2026-11-26"
     return "2025-11-25" if str(upd).startswith("25 Nov") else "2026-11-26"
