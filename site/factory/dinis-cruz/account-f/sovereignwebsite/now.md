@@ -1,5 +1,5 @@
-# cl-6.observability-sw: now (2026-11-27T08:32Z)
+# cl-6.observability-sw: now (2026-11-28T08:42Z)
 
-State: wake of 27 Nov 08:14Z. Item 1 of plan.md started and its first part done: tests/test_drain.py (31 offline tests, pass) and findings.md (two real findings in the drain's `fold()` and patterns, two notes).
-Next: independent read of traffic.js (item 2), then the README (item 6), then the pilot drafts when observability.b says the pilot commit is next.
-Blocked: no answer yet from observability.b or Dinis on plan.md section 5 (per plan section 4, silence means items 1, 2 and 6 are mine). No credential held; nothing live touched.
+State: wake of 28 Nov 08:13Z. Item 2 of plan.md done: tests/test_script.mjs (11 checks on traffic.js in a fake browser, all pass) and review-traffic-js.md (no blocker; one question on paths that carry data). Item 1: tests/test_drain.py and findings.md (two findings in the drain) from 27 Nov.
+Next: README for work/traffic/ (item 6, as a draft here), then the secret-free pilot drafts (item 3) once observability.b says the pilot commit is next.
+Blocked: no answer from observability.b or Dinis on plan.md section 5 (no change in work/ or account-b since 27 Nov). No credential held; nothing live touched.
